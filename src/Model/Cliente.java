@@ -16,6 +16,9 @@ public class Cliente {
     private String email;
     private int cpf;
     private String sexo;
+    private String endereco;
+    private int numero;
+    private String complemento;
     private String bairro;
     private int cep;
     private String cidade;
@@ -23,26 +26,23 @@ public class Cliente {
     private int telefone;
     private int celular;
 
-    public Cliente(int id, String Nome, String email, int cpf, String sexo, String bairro, int cep, String cidade, String uf, int telefone, int celular) {
-        this.id = id;
+    public Cliente(String Nome, String email, int cpf, String sexo,String endereco,int numero,String complemento, String bairro, int cep, String cidade, String uf, int telefone, int celular) {
         this.nome = Nome;
         this.email = email;
         this.cpf = cpf;
         this.sexo = sexo;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cep = cep;
         this.cidade = cidade;
         this.uf = uf;
         this.telefone = telefone;
         this.celular = celular;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
+    
     public String getNome() {
         return nome;
     }
