@@ -5,6 +5,10 @@
  */
 package View;
 
+import Controller.ClienteController;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author enzo.samorim
@@ -17,6 +21,7 @@ public class cadastroVenda extends javax.swing.JFrame {
     public cadastroVenda() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,7 +50,7 @@ public class cadastroVenda extends javax.swing.JFrame {
         txtCliente = new javax.swing.JTextField();
         btnBuscarCliente = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
         btnBuscarProduto = new javax.swing.JButton();
         btnCadastrarCliente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -145,7 +150,7 @@ public class cadastroVenda extends javax.swing.JFrame {
             }
         });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
             },
@@ -153,7 +158,7 @@ public class cadastroVenda extends javax.swing.JFrame {
                 "Nome Completo", "CPF", "E-Mail"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblClientes);
 
         btnBuscarProduto.setText("Buscar");
         btnBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -208,8 +213,8 @@ public class cadastroVenda extends javax.swing.JFrame {
                     .addComponent(btnBuscarCliente)
                     .addComponent(btnCadastrarCliente))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,7 +223,7 @@ public class cadastroVenda extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Formas de pagamento"));
@@ -330,13 +335,14 @@ public class cadastroVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
-       cadastroCliente cdCliente = new cadastroCliente();
+        cadastroCliente cdCliente = new cadastroCliente();
         cdCliente.setVisible(true);
         cdCliente.setDefaultCloseOperation(cadastroCliente.DISPOSE_ON_CLOSE); // para fechar apenas a tela secundaria
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
+        this.LoadTable();
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     /**
@@ -375,6 +381,22 @@ public class cadastroVenda extends javax.swing.JFrame {
         });
     }
 
+    public void LoadTable() {
+
+        ArrayList<String[]> linhasClientes = ClienteController.getClientes();
+
+        DefaultTableModel tmClientes = new DefaultTableModel();
+        tmClientes.addColumn("Nome Completo");
+        tmClientes.addColumn("CPF");
+        tmClientes.addColumn("E-Mail");
+
+        for (String[] c : linhasClientes) {
+            tmClientes.addRow(c);
+        }
+
+        tblClientes.setModel(tmClientes);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionaCarrinho;
     private javax.swing.JButton btnBuscarCliente;
@@ -402,7 +424,7 @@ public class cadastroVenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtPesquisaProduto;
     private javax.swing.JTextField txtQuantidadeCarrinho;

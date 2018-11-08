@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.Cliente;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +15,11 @@ import Model.Cliente;
 public class ClienteDAO {
 
     public static boolean Salvar(Cliente p) {
-        return true;
+        return SimulaDB.getInstance().SalvarCliente(p);
+    }
+
+    public static ArrayList<Cliente> getClientes() {
+        return SimulaDB.getInstance().getClientes();
     }
 
 }
