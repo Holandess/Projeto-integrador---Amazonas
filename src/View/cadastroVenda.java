@@ -21,7 +21,6 @@ public class cadastroVenda extends javax.swing.JFrame {
     public cadastroVenda() {
         initComponents();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +46,7 @@ public class cadastroVenda extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         btnAdicionaCarrinho = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        txtCliente = new javax.swing.JTextField();
+        txtBuscaCliente = new javax.swing.JTextField();
         btnBuscarCliente = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
@@ -196,7 +195,7 @@ public class cadastroVenda extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -209,7 +208,7 @@ public class cadastroVenda extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCliente)
                     .addComponent(btnCadastrarCliente))
                 .addGap(18, 18, 18)
@@ -342,7 +341,8 @@ public class cadastroVenda extends javax.swing.JFrame {
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
-        this.LoadTable();
+        //this.LoadTable();
+        this.LoadSearch(txtBuscaCliente.getText());
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     /**
@@ -379,6 +379,22 @@ public class cadastroVenda extends javax.swing.JFrame {
                 new cadastroVenda().setVisible(true);
             }
         });
+    }
+
+    public void LoadSearch(String busca) {
+
+        ArrayList<String[]> linhasClientes = ClienteController.buscaCliente(busca);
+
+        DefaultTableModel tmClientes = new DefaultTableModel();
+        tmClientes.addColumn("Nome Completo");
+        tmClientes.addColumn("CPF");
+        tmClientes.addColumn("E-Mail");
+
+        for (String[] c : linhasClientes) {
+            tmClientes.addRow(c);
+        }
+
+        tblClientes.setModel(tmClientes);
     }
 
     public void LoadTable() {
@@ -425,7 +441,7 @@ public class cadastroVenda extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable tblClientes;
-    private javax.swing.JTextField txtCliente;
+    private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JTextField txtPesquisaProduto;
     private javax.swing.JTextField txtQuantidadeCarrinho;
     // End of variables declaration//GEN-END:variables

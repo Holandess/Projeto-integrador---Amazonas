@@ -86,7 +86,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtCliente" min="-2" pref="247" max="-2" attributes="0"/>
+                          <Component id="txtBuscaCliente" min="-2" pref="247" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnBuscarCliente" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -103,7 +103,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel17" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="txtCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtBuscaCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCadastrarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -267,7 +267,7 @@
             <Property name="text" type="java.lang.String" value="Cliente: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCliente">
+        <Component class="javax.swing.JTextField" name="txtBuscaCliente">
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscarCliente">
           <Properties>
