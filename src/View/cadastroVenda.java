@@ -142,6 +142,7 @@ public class cadastroVenda extends javax.swing.JFrame {
 
         jLabel17.setText("Cliente: ");
 
+        btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/research.png"))); // NOI18N
         btnBuscarCliente.setText("Buscar");
         btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
