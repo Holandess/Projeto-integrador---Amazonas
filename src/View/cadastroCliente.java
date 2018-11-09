@@ -65,9 +65,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         } else {
             txtCidade.setBorder(BorderFactory.createLineBorder(Color.gray));
         }
-
+        
+        //Ajustar Parse
         try {
-            Integer.parseInt(this.txtCPF.getText());
+            Long.parseLong(this.txtCPF.getText());
             txtCPF.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
             txtCPF.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -83,7 +84,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 
         try {
-            Integer.parseInt(this.txtTelefone.getText());
+            Long.parseLong(this.txtTelefone.getText());
             txtTelefone.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
             txtTelefone.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -91,7 +92,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 
         try {
-            Integer.parseInt(this.txtCelular.getText());
+            Long.parseLong(this.txtCelular.getText());
             txtCelular.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
             txtCelular.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -99,7 +100,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 
         try {
-            Integer.parseInt(this.txtCEP.getText());
+            Long.parseLong(this.txtCEP.getText());
             txtCEP.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
             txtCEP.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -395,20 +396,22 @@ public class cadastroCliente extends javax.swing.JFrame {
         if (validarFormulario()) {
             Cliente c = new Cliente(txtNome.getText(),
                     txtEmail.getText(),
-                    Integer.parseInt(this.txtCPF.getText()),
+                    Long.parseLong(this.txtCPF.getText()),
                     cbSexo.getSelectedItem().toString(),
                     txtEndereco.getText(),
                     Integer.parseInt(this.txtNumero.getText()),
                     txtComp.getText(),
                     txtBairro.getText(),
-                    Integer.parseInt(this.txtCEP.getText()),
+                    Long.parseLong(this.txtCEP.getText()),
                     txtCidade.getText(),
                     cbUF.getSelectedItem().toString(),
-                    Integer.parseInt(this.txtTelefone.getText()),
-                    Integer.parseInt(this.txtCelular.getText())
+                    Long.parseLong(this.txtTelefone.getText()),
+                    Long.parseLong(this.txtCelular.getText())
             );
             
             ClienteController.Salvar(c);
+            JOptionPane.showMessageDialog(this, "Cliente Criado com Sucesso!!");
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Preencher os campos destacados corretamente");
         }
