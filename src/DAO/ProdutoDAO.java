@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ProdutoDAO {
 
     public static boolean Salvar(Produto p) {
-        return true;
+       return SimulaDB.getInstance().SalvarProduto(p);
     }
 
     public static ArrayList<Produto> getProdutos() {

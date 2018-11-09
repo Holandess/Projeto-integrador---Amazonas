@@ -8,6 +8,7 @@ package View;
 import javax.swing.JOptionPane;
 import Controller.ClienteController;
 import Controller.ProdutoController;
+import Model.Produto;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 
@@ -20,7 +21,8 @@ public class NewCadProduto extends javax.swing.JFrame {
     /**
      * Creates new form NewCadProduto
      */
-    private String modoTela;
+   
+   
 
     public NewCadProduto() {
         initComponents();
@@ -125,7 +127,7 @@ public class NewCadProduto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtVlrUnitarioProd = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        cboCategoriaProduto = new javax.swing.JComboBox<>();
+        cboCategoria = new javax.swing.JComboBox<>();
         btnNovoProduto = new javax.swing.JButton();
         btnSalvaProduto = new javax.swing.JButton();
         btnEditaProduto = new javax.swing.JButton();
@@ -159,8 +161,8 @@ public class NewCadProduto extends javax.swing.JFrame {
 
         jLabel5.setText("Selecionar Categoria:");
 
-        cboCategoriaProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Computador", "Notebook", "Peças", "Acessórios" }));
-        cboCategoriaProduto.setToolTipText("");
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Computador", "Notebook", "Peças", "Acessórios" }));
+        cboCategoria.setToolTipText("");
 
         btnNovoProduto.setText("Novo");
         btnNovoProduto.setMaximumSize(new java.awt.Dimension(55, 23));
@@ -250,7 +252,7 @@ public class NewCadProduto extends javax.swing.JFrame {
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtNomeProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                                             .addComponent(txtDescProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                                            .addComponent(cboCategoriaProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(cboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                         .addComponent(btnNovoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -284,7 +286,7 @@ public class NewCadProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(cboCategoriaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -349,12 +351,21 @@ public class NewCadProduto extends javax.swing.JFrame {
     private void txtQtdProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQtdProdutoActionPerformed
-
+     // será substituido pelo idProduto automatico gerado pelo banco de dados.
     private void btnSalvaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaProdutoActionPerformed
         if (ValidarFormulario()) {
-
+            
+            
+            Produto p = new Produto(Integer.parseInt("1"),
+                    cboCategoria.getSelectedItem().toString(),
+                    txtNomeProduto.getText(),
+                    txtDescProduto.getText(),
+                    Integer.parseInt(this.txtQtdProduto.getText()),
+                    Float.parseFloat(txtVlrUnitarioProd.getText())
+            );
+            
             JOptionPane.showMessageDialog(this, "Valido ! ");
-            //ProdutoController.Salvar();
+            ProdutoController.Salvar(p);
 
         }else{
                    JOptionPane.showMessageDialog(this, "Preencher corretamente os campos ! ");
@@ -417,7 +428,7 @@ public class NewCadProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluiProduto;
     private javax.swing.JButton btnNovoProduto;
     private javax.swing.JButton btnSalvaProduto;
-    private javax.swing.JComboBox<String> cboCategoriaProduto;
+    private javax.swing.JComboBox<String> cboCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
