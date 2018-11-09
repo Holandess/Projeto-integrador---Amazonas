@@ -6,6 +6,7 @@
 package View;
 
 import Controller.ClienteController;
+import Controller.ProdutoController;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,7 +36,7 @@ public class cadastroVenda extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPesquisaProduto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProdutos = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,7 +69,7 @@ public class cadastroVenda extends javax.swing.JFrame {
 
         jLabel3.setText("Codigo ou Nome do Produto: ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -76,7 +77,7 @@ public class cadastroVenda extends javax.swing.JFrame {
                 "Codigo do Produto", "Nome Produto", "Categ.", "Valor"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProdutos);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Nome Do Produto");
@@ -268,6 +269,7 @@ public class cadastroVenda extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        btnRemoveCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/cancel-16.png"))); // NOI18N
         btnRemoveCarrinho.setText("Remover");
 
         jLabel11.setText("Valor Total");
@@ -335,6 +337,7 @@ public class cadastroVenda extends javax.swing.JFrame {
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
         // TODO add your handling code here:
+        this.LoadSearchProduct(txtPesquisaProduto.getText());
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
@@ -394,11 +397,28 @@ public class cadastroVenda extends javax.swing.JFrame {
         tmClientes.addColumn("CPF");
         tmClientes.addColumn("E-Mail");
 
-        for (String[] c : linhasClientes) {
+        for(String[] c : linhasClientes) {
             tmClientes.addRow(c);
         }
 
         tblClientes.setModel(tmClientes);
+    }
+    
+        public void LoadSearchProduct(String busca) {
+
+        ArrayList<String[]> linhasProdutos = ProdutoController.buscaProduto(busca);
+
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("Codigo do Produto");
+        tmProdutos.addColumn("Nome Produto");
+        tmProdutos.addColumn("Categ.");
+        tmProdutos.addColumn("Valor");
+
+        for (String[] c : linhasProdutos) {
+            tmProdutos.addRow(c);
+        }
+
+        tblProdutos.setModel(tmProdutos);
     }
 
     public void LoadTable() {
@@ -442,9 +462,9 @@ public class cadastroVenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable tblClientes;
+    private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JTextField txtPesquisaProduto;
     private javax.swing.JTextField txtQuantidadeCarrinho;
