@@ -95,6 +95,7 @@ public class cadastroVenda extends javax.swing.JFrame {
 
         jLabel16.setText("QTD");
 
+        btnAdicionaCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/plus-16.png"))); // NOI18N
         btnAdicionaCarrinho.setText("Adicionar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -160,6 +161,7 @@ public class cadastroVenda extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblClientes);
 
+        btnBuscarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/research.png"))); // NOI18N
         btnBuscarProduto.setText("Buscar");
         btnBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +169,7 @@ public class cadastroVenda extends javax.swing.JFrame {
             }
         });
 
+        btnCadastrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/plus-16.png"))); // NOI18N
         btnCadastrarCliente.setText("Cadastrar Cliente");
         btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,9 +189,9 @@ public class cadastroVenda extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPesquisaProduto)
+                                .addComponent(txtPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
