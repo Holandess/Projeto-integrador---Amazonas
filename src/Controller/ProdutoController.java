@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class ProdutoController {
 
-    public static boolean Salvar(int idProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
-        Produto p = new Produto(idProduto, Categoria, nomeProduto, descProduto, qtdProduto, valorUnitario);
+    public static boolean Salvar(Produto p) {
+      //FProduto p = new Produto();
         return ProdutoDAO.Salvar(p);
     }
     

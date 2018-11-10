@@ -9,7 +9,7 @@ public class Produto {
     private int qtdProduto;
     private float valorUnitario;
 
-    public Produto(int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
+    public Produto( int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
         this.codProduto = codProduto;
         this.Categoria = Categoria;
         this.nomeProduto = nomeProduto;
@@ -18,11 +18,19 @@ public class Produto {
         this.valorUnitario = valorUnitario;
     }
 
+    public Produto(String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Produto(String toString, String text, String text0, String text1, String text2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getcodProduto() {
         return codProduto;
     }
 
-    public void setIdProduto(int codProduto) {
+    public void setcodProduto(int codProduto) {
         this.codProduto = codProduto;
     }
 
