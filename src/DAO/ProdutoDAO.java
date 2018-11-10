@@ -6,18 +6,20 @@
 package DAO;
 
 import Model.Produto;
+import java.util.ArrayList;
 
 /**
  *
  * @author davi.msantos7
  */
+public class ProdutoDAO {
 
-
-    public class ProdutoDAO {
-
-        public static boolean Salvar(Produto p) {
-            return true;
-        }
-
+    public static boolean Salvar(Produto p) {
+        return true;
     }
 
+    public static ArrayList<Produto> getProdutos() {
+        return SimulaDB.getInstance().getProdutos();
+    }
+
+}
