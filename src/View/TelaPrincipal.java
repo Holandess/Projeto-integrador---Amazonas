@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtQtdProduto.setText("");
         txtVlrUnitarioProd.setText("");
     }
+    
 
     private boolean ValidarFormulario() {
 
@@ -120,7 +121,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtbuscaProduto = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProdutosPesquisa = new javax.swing.JTable();
+        tblProdutos1 = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -179,7 +180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel10.setText("Codigo ou Nome do Produto: ");
 
-        tblProdutosPesquisa.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -187,7 +188,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 "Codigo do Produto", "Nome Produto", "Categ.", "Valor"
             }
         ));
-        jScrollPane2.setViewportView(tblProdutosPesquisa);
+        jScrollPane2.setViewportView(tblProdutos1);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Nome Do Produto");
@@ -776,7 +777,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tmProdutos.addRow(c);
         }
 
-        tblProdutosPesquisa.setModel(tmProdutos);
+        tblProdutos1.setModel(tmProdutos);
     }
 
     public void LoadTable() {
@@ -842,8 +843,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable tblClientes;
+    private javax.swing.JTable tblProdutos1;
     private javax.swing.JTable tblProdutosCadastrados;
-    private javax.swing.JTable tblProdutosPesquisa;
     private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JFormattedTextField txtDescProduto;
     private javax.swing.JFormattedTextField txtNomeProduto;
