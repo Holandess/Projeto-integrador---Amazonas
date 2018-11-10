@@ -354,7 +354,7 @@ public class NewCadProduto extends javax.swing.JFrame {
         if (ValidarFormulario()) {
 
             JOptionPane.showMessageDialog(this, "Valido ! ");
-            ProdutoController.Salvar();
+            //ProdutoController.Salvar();
 
         }else{
                    JOptionPane.showMessageDialog(this, "Preencher corretamente os campos ! ");
