@@ -764,7 +764,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
         public void LoadSearchProduct(String busca) {
 
-        ArrayList<String[]> linhasProdutos = ProdutoController.buscaProduto(busca);
+        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos(busca);
 
         DefaultTableModel tmProdutos = new DefaultTableModel();
         tmProdutos.addColumn("Codigo do Produto");

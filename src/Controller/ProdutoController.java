@@ -11,7 +11,7 @@ public class ProdutoController {
         return ProdutoDAO.Salvar(p);
     }
     
-        public static ArrayList<String[]> buscaProduto(String busca) {
+        public static ArrayList<String[]> getProdutos(String busca) {
         ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
         ArrayList<String[]> listaProdutos = new ArrayList<>();
 
