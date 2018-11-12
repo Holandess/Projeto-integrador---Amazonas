@@ -107,7 +107,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtPesquisaProduto2" min="-2" pref="214" max="-2" attributes="0"/>
+                                          <Component id="txtBuscaProduto" min="-2" pref="214" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnBuscarProduto" min="-2" pref="91" max="-2" attributes="0"/>
                                       </Group>
@@ -145,7 +145,7 @@
                           <Component id="jScrollPane4" pref="95" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtPesquisaProduto2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBuscaProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="btnBuscarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -165,7 +165,7 @@
                     <Property name="text" type="java.lang.String" value="Codigo ou Nome do Produto: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtPesquisaProduto2">
+                <Component class="javax.swing.JTextField" name="txtBuscaProduto">
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane2">
                   <AuxValues>
