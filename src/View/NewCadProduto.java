@@ -353,24 +353,7 @@ public class NewCadProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQtdProdutoActionPerformed
      // será substituido pelo idProduto automatico gerado pelo banco de dados.
     private void btnSalvaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaProdutoActionPerformed
-        if (ValidarFormulario()) {
-            
-            
-            Produto p = new Produto(Integer.parseInt("1"),
-                    cboCategoria.getSelectedItem().toString(),
-                    txtNomeProduto.getText(),
-                    txtDescProduto.getText(),
-                    Integer.parseInt(this.txtQtdProduto.getText()),
-                    Float.parseFloat(txtVlrUnitarioProd.getText())
-            );
-            
-            JOptionPane.showMessageDialog(this, "Valido ! ");
-            ProdutoController.Salvar(p);
-
-        }else{
-                   JOptionPane.showMessageDialog(this, "Preencher corretamente os campos ! ");
-
-        }
+        
     }//GEN-LAST:event_btnSalvaProdutoActionPerformed
 
     private void btnCancelaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaCadastroActionPerformed

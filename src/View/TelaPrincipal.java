@@ -7,6 +7,7 @@ package View;
 
 import Controller.ClienteController;
 import Controller.ProdutoController;
+import Model.Produto;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -25,8 +26,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
     }
-    
-        public void LimparFormularioCadProduto() {
+
+    public void LimparFormularioCadProduto() {
         txtNomeProduto.setText("");
         txtDescProduto.setText("");
         txtPesquisaProduto.setText("");
@@ -70,7 +71,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             txtDescProduto.setBorder(BorderFactory.createEmptyBorder());
         }
 
-         try {
+        try {
             Integer.parseInt(this.txtQtdProduto.getText());
             txtQtdProduto.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
@@ -78,7 +79,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             pass = false;
         }
 
-         try {
+        try {
             Integer.parseInt(this.txtVlrUnitarioProd.getText());
             txtVlrUnitarioProd.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
@@ -120,7 +121,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtbuscaProduto = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProdutosPesquisa = new javax.swing.JTable();
+        tblProdutos1 = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -179,7 +180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel10.setText("Codigo ou Nome do Produto: ");
 
-        tblProdutosPesquisa.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -187,7 +188,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 "Codigo do Produto", "Nome Produto", "Categ.", "Valor"
             }
         ));
-        jScrollPane2.setViewportView(tblProdutosPesquisa);
+        jScrollPane2.setViewportView(tblProdutos1);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Nome Do Produto");
@@ -672,21 +673,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnSalvaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaProdutoActionPerformed
         if (ValidarFormulario()) {
 
-            JOptionPane.showMessageDialog(this, "Valido ! ");
-            //ProdutoController.Salvar();
+            Produto p = new Produto(Integer.parseInt("1"),
+                    cboCategoriaProduto.getSelectedItem().toString(),
+                    txtNomeProduto.getText(),
+                    txtDescProduto.getText(),
+                    Integer.parseInt(this.txtQtdProduto.getText()),
+                    Float.parseFloat(txtVlrUnitarioProd.getText())
+            );
 
-        }else{
+            JOptionPane.showMessageDialog(this, "Valido ! ");
+            ProdutoController.Salvar(p);
+
+        } else {
             JOptionPane.showMessageDialog(this, "Preencher corretamente os campos ! ");
 
         }
     }//GEN-LAST:event_btnSalvaProdutoActionPerformed
 
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
-        if (ValidarFormularioBusca()) {
 
-            JOptionPane.showMessageDialog(this, "Valido ! ");
+        LoadTableProdutos();
 
-        }
+        LoadSearchProduct(txtPesquisaProduto.getText());
+
+        //this.LoadTable();
+        //this.LoadSearchProduct(txtbuscaProduto.getText());
+
+
     }//GEN-LAST:event_botaoOkActionPerformed
 
     private void btnCancelaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaCadastroActionPerformed
@@ -695,12 +708,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
-        //this.LoadTable();
+        this.LoadTable();
         this.LoadSearch(txtBuscaCliente.getText());
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
         // TODO add your handling code here:
+        this.LoadTable();
         this.LoadSearchProduct(txtbuscaProduto.getText());
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
@@ -744,8 +758,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
     public void LoadSearch(String busca) {
 
         ArrayList<String[]> linhasClientes = ClienteController.buscaCliente(busca);
@@ -755,14 +768,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tmClientes.addColumn("CPF");
         tmClientes.addColumn("E-Mail");
 
-        for(String[] c : linhasClientes) {
+        for (String[] c : linhasClientes) {
             tmClientes.addRow(c);
         }
 
         tblClientes.setModel(tmClientes);
     }
-    
-        public void LoadSearchProduct(String busca) {
+
+    public void LoadSearchProduct(String busca) {
 
         ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos(busca);
 
@@ -776,7 +789,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tmProdutos.addRow(c);
         }
 
-        tblProdutosPesquisa.setModel(tmProdutos);
+        tblProdutos1.setModel(tmProdutos);
     }
 
     public void LoadTable() {
@@ -793,6 +806,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         tblClientes.setModel(tmClientes);
+    }
+
+    public void LoadTableProdutos() {
+
+        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos();
+
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("Nome Produto");
+        tmProdutos.addColumn("Preço");
+        tmProdutos.addColumn("Descrição");
+
+        for (String[] c : linhasProdutos) {
+            tmProdutos.addRow(c);
+        }
+
+        tblProdutosCadastrados.setModel(tmProdutos);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -842,8 +871,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable tblClientes;
+    private javax.swing.JTable tblProdutos1;
     private javax.swing.JTable tblProdutosCadastrados;
-    private javax.swing.JTable tblProdutosPesquisa;
     private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JFormattedTextField txtDescProduto;
     private javax.swing.JFormattedTextField txtNomeProduto;
