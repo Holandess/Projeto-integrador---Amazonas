@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +27,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        tblProdutos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                // do some actions here, for example
+                // print first column value from selected row
+                System.out.println(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
+            }
+        });
     }
 
     public void LimparFormularioCadProduto() {
@@ -332,8 +341,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarProduto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -781,7 +790,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         if (context.equals("cadastroVenda")) {
             tblProdutos.setModel(tmProdutos);
-        }else if(context.equals("cadastroProduto")){
+        } else if (context.equals("cadastroProduto")) {
             tblProdutosCadastrados.setModel(tmProdutos);
         }
     }
@@ -800,22 +809,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         tblClientes.setModel(tmClientes);
-    }
-
-    public void LoadTableProdutos() {
-
-        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos();
-
-        DefaultTableModel tmProdutos = new DefaultTableModel();
-        tmProdutos.addColumn("Nome Produto");
-        tmProdutos.addColumn("Preço");
-        tmProdutos.addColumn("Descrição");
-
-        for (String[] c : linhasProdutos) {
-            tmProdutos.addRow(c);
-        }
-
-        tblProdutosCadastrados.setModel(tmProdutos);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

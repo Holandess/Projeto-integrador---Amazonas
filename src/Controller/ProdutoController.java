@@ -17,25 +17,12 @@ public class ProdutoController {
         ArrayList<String[]> listaProdutos = new ArrayList<>();
 
         for (int i = 0; i < produtos.size(); i++) {
-            if (busca.equals(produtos.get(i).getcodProduto()) || busca.equals(produtos.get(i).getNomeProduto())) {
+            if (busca.equals(produtos.get(i).getcodProduto()) || produtos.get(i).getNomeProduto().contains(busca)) {
                 listaProdutos.add(new String[]{String.valueOf(produtos.get(i).getcodProduto()), produtos.get(i).getNomeProduto(), String.valueOf(produtos.get(i).getCategoria()), String.valueOf(produtos.get(i).getValorUnitario())});
             }
         }
 
         return listaProdutos;
-    }
-
-    public static ArrayList<String[]> getProdutos() {
-        ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
-        ArrayList<String[]> listaProdutos = new ArrayList<>();
-
-        for (int i = 0; i < produtos.size(); i++) {
-            listaProdutos.add(new String[]{String.valueOf(produtos.get(i).getNomeProduto())});
-
-        }
-
-        return listaProdutos;
-
     }
 
 }
