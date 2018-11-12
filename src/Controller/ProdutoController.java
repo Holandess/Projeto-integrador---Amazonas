@@ -25,4 +25,18 @@ public class ProdutoController {
         return listaProdutos;
     }
 
+    public static Produto getProdutoById(String idProduto) {
+        //FProduto p = new Produto();
+        ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
+        ArrayList<String[]> listaProdutos = new ArrayList<>();
+        
+        Produto p = new Produto();
+        for (int i = 0; i < produtos.size(); i++) {
+            if (idProduto.equals(String.valueOf(produtos.get(i).getcodProduto()))) {
+                p = produtos.get(i);
+            }
+        }
+       return p;
+    }
+
 }

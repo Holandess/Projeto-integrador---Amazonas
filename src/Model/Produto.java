@@ -1,4 +1,5 @@
 package Model;
+import java.util.UUID;
 
 public class Produto {
 
@@ -10,6 +11,7 @@ public class Produto {
     private float valorUnitario;
 
     public Produto( int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
+        //this.codProduto = UUID.randomUUID();
         this.codProduto = codProduto;
         this.Categoria = Categoria;
         this.nomeProduto = nomeProduto;
@@ -17,7 +19,11 @@ public class Produto {
         this.qtdProduto = qtdProduto;
         this.valorUnitario = valorUnitario;
     }
+    
+    public Produto(){
+    }
 
+    
    /* public Produto(String toString) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
