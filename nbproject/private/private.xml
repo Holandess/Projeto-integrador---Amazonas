@@ -3,7 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/guilherme/Documents/Projeto-integrador---Amazonas/src/View/TelaPrincipal.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/DAO/SimulaDB.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/DAO/ProdutoDAO.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Model/Cliente.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Controller/ClienteController.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/View/cadastroVenda.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/DAO/ClienteDAO.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Controller/ProdutoController.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/View/TelaPrincipal.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Model/Produto.java</file>
+=======
+            <file>file:/home/guilherme/Dev/Faculdade/Projeto-integrador---Amazonas/src/pi/PI.java</file>
+>>>>>>> fc85e88471d7aacd9ebf7c19789c89dfc02a8033
+>>>>>>> 6d28e4526dc6a914bbaf0229a2e986d5e28ed636
         </group>
     </open-files>
 </project-private>

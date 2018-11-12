@@ -7,6 +7,7 @@ package View;
 
 import Controller.ClienteController;
 import Controller.ProdutoController;
+import Model.Produto;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -25,8 +26,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
     }
-    
-        public void LimparFormularioCadProduto() {
+
+    public void LimparFormularioCadProduto() {
         txtNomeProduto.setText("");
         txtDescProduto.setText("");
         txtPesquisaProduto.setText("");
@@ -70,7 +71,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             txtDescProduto.setBorder(BorderFactory.createEmptyBorder());
         }
 
-         try {
+        try {
             Integer.parseInt(this.txtQtdProduto.getText());
             txtQtdProduto.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
@@ -78,7 +79,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             pass = false;
         }
 
-         try {
+        try {
             Integer.parseInt(this.txtVlrUnitarioProd.getText());
             txtVlrUnitarioProd.setBorder(BorderFactory.createLineBorder(Color.gray));
         } catch (NumberFormatException e) {
@@ -120,7 +121,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtBuscaProduto = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProdutos1 = new javax.swing.JTable();
+        tblProdutos = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -173,13 +174,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane2.setBorder(null);
-
-        jPanel6.setBorder(null);
-
         jLabel10.setText("Codigo ou Nome do Produto: ");
 
-        tblProdutos1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -187,7 +184,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 "Codigo do Produto", "Nome Produto", "Categ.", "Valor"
             }
         ));
-        jScrollPane2.setViewportView(tblProdutos1);
+        jScrollPane2.setViewportView(tblProdutos);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Nome Do Produto");
@@ -440,8 +437,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Registro de Venda", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/online-shop.png")), jPanel5, ""); // NOI18N
 
-        jPanel1.setBorder(null);
-
         jLabel1.setText("Produto:");
 
         jLabel2.setText("Quantidade:");
@@ -672,21 +667,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnSalvaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaProdutoActionPerformed
         if (ValidarFormulario()) {
 
-            JOptionPane.showMessageDialog(this, "Valido ! ");
-            //ProdutoController.Salvar();
+            Produto p = new Produto(Integer.parseInt("1"),
+                    cboCategoriaProduto.getSelectedItem().toString(),
+                    txtNomeProduto.getText(),
+                    txtDescProduto.getText(),
+                    Integer.parseInt(this.txtQtdProduto.getText()),
+                    Float.parseFloat(txtVlrUnitarioProd.getText())
+            );
 
-        }else{
+            JOptionPane.showMessageDialog(this, "Produto Cadastrado com sucesso!!");
+            ProdutoController.Salvar(p);
+
+        } else {
             JOptionPane.showMessageDialog(this, "Preencher corretamente os campos ! ");
 
         }
     }//GEN-LAST:event_btnSalvaProdutoActionPerformed
 
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
-        if (ValidarFormularioBusca()) {
 
-            JOptionPane.showMessageDialog(this, "Valido ! ");
+        //LoadTableProdutos();
+        this.LoadSearchProduct(txtPesquisaProduto.getText(), "cadastroProduto");
 
-        }
+        //this.LoadTable();
+        //this.LoadSearchProduct(txtbuscaProduto.getText());
     }//GEN-LAST:event_botaoOkActionPerformed
 
     private void btnCancelaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaCadastroActionPerformed
@@ -695,13 +699,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
-        //this.LoadTable();
+
         this.LoadSearch(txtBuscaCliente.getText());
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
         // TODO add your handling code here:
-        this.LoadSearchProduct(txtBuscaProduto.getText());
+        //this.LoadTable();
+        this.LoadSearchProduct(txtBuscaProduto.getText(), "cadastroVenda");
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
@@ -744,8 +749,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
     public void LoadSearch(String busca) {
 
         ArrayList<String[]> linhasClientes = ClienteController.buscaCliente(busca);
@@ -755,16 +759,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tmClientes.addColumn("CPF");
         tmClientes.addColumn("E-Mail");
 
-        for(String[] c : linhasClientes) {
+        for (String[] c : linhasClientes) {
             tmClientes.addRow(c);
         }
 
         tblClientes.setModel(tmClientes);
     }
-    
-        public void LoadSearchProduct(String busca) {
 
-        ArrayList<String[]> linhasProdutos = ProdutoController.buscaProduto(busca);
+    public void LoadSearchProduct(String busca, String context) {
+
+        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos(busca);
 
         DefaultTableModel tmProdutos = new DefaultTableModel();
         tmProdutos.addColumn("Codigo do Produto");
@@ -775,8 +779,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         for (String[] c : linhasProdutos) {
             tmProdutos.addRow(c);
         }
-
-        tblProdutos.setModel(tmProdutos);
+        if (context.equals("cadastroVenda")) {
+            tblProdutos.setModel(tmProdutos);
+        }else if(context.equals("cadastroProduto")){
+            tblProdutosCadastrados.setModel(tmProdutos);
+        }
     }
 
     public void LoadTable() {
@@ -795,9 +802,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tblClientes.setModel(tmClientes);
     }
 
+    public void LoadTableProdutos() {
+
+        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos();
+
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("Nome Produto");
+        tmProdutos.addColumn("Preço");
+        tmProdutos.addColumn("Descrição");
+
+        for (String[] c : linhasProdutos) {
+            tmProdutos.addRow(c);
+        }
+
+        tblProdutosCadastrados.setModel(tmProdutos);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoOk;
-    private javax.swing.JButton btnAdicionaCarrinho;
     private javax.swing.JButton btnAdicionaCarrinho1;
     private javax.swing.JButton btnAtualizaLista;
     private javax.swing.JButton btnBuscarCliente;
@@ -816,10 +838,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -832,20 +850,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -854,16 +866,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblProdutos;
-    private javax.swing.JTable tblProdutos1;
     private javax.swing.JTable tblProdutosCadastrados;
     private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JTextField txtBuscaProduto;
     private javax.swing.JFormattedTextField txtDescProduto;
     private javax.swing.JFormattedTextField txtNomeProduto;
     private javax.swing.JFormattedTextField txtPesquisaProduto;
-    private javax.swing.JTextField txtPesquisaProduto1;
     private javax.swing.JFormattedTextField txtQtdProduto;
-    private javax.swing.JTextField txtQuantidadeCarrinho;
     private javax.swing.JTextField txtQuantidadeCarrinho1;
     private javax.swing.JFormattedTextField txtVlrUnitarioProd;
     // End of variables declaration//GEN-END:variables
