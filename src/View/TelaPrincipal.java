@@ -35,7 +35,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
                 //System.out.println(p.getDescProduto());
-                
+
                 lblNomeProduto.setText(p.getNomeProduto());
                 txtDescricaoProduto.setText(p.getDescProduto());
             }
@@ -55,14 +55,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private boolean ValidarFormulario() {
 
         boolean pass = true;
-        
+
         if (this.cboCategoriaProduto.getSelectedIndex() == 0) {
             cboCategoriaProduto.setBorder(BorderFactory.createLineBorder(Color.red));
             pass = false;
         } else {
             cboCategoriaProduto.setBorder(BorderFactory.createEmptyBorder());
         }
-        
+
         if (this.txtNomeProduto.getText().equalsIgnoreCase("")) {
             txtNomeProduto.setBorder(BorderFactory.createLineBorder(Color.red));
             pass = false;
@@ -344,6 +344,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnRemoveCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/cancel-16.png"))); // NOI18N
         btnRemoveCarrinho.setText("Remover");
+        btnRemoveCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveCarrinhoActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("Valor Total R$");
 
@@ -718,7 +723,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAdicionaCarrinho1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaCarrinho1ActionPerformed
         // TODO add your handling code here:
-        LoadCarrinho(txtQuantidadeCarrinho1.getText());
+        addCarrinho(txtQuantidadeCarrinho1.getText());
     }//GEN-LAST:event_btnAdicionaCarrinho1ActionPerformed
 
     private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
@@ -727,6 +732,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         LimparFormulario();
 
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
+
+    private void btnRemoveCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveCarrinhoActionPerformed
+        if (tblCarrinho.getRowCount() > 0) {
+
+            listaCarrinho.remove(tblCarrinho.getSelectedRow());
+            LoadCarrinhoRemove();
+        }
+    }//GEN-LAST:event_btnRemoveCarrinhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -763,10 +776,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    public void LoadCarrinho(String qtd) {
+    public void addCarrinho(String qtd) {
 
-        
-        double valor = Double.parseDouble(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()) *  Integer.parseInt(qtd);
+        double valor = Double.parseDouble(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()) * Integer.parseInt(qtd);
         lblValor.setText(Double.toString(valor + Double.parseDouble(lblValor.getText())));
         this.listaCarrinho.add(new String[]{String.valueOf(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString()), tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 1).toString(), qtd, Double.toString(valor)});
         DefaultTableModel tmiTems = new DefaultTableModel();
@@ -781,6 +793,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tblCarrinho.setModel(tmiTems);
 
+    }
+
+    public void LoadCarrinhoRemove() {
+        
+        DefaultTableModel tmiTems = new DefaultTableModel();
+        tmiTems.addColumn("Codigo do Produto");
+        tmiTems.addColumn("Nome Produto");
+        tmiTems.addColumn("Qtd");
+        tmiTems.addColumn("Valor");
+        for (String[] c : this.listaCarrinho) {
+            tmiTems.addRow(c);
+        }
+        
+        double total = Double.parseDouble(lblValor.getText()) - Double.parseDouble(tblCarrinho.getValueAt(tblCarrinho.getSelectedRow(), 3).toString());
+        lblValor.setText(Double.toString(total));
+        tblCarrinho.setModel(tmiTems);
+        
     }
 
     public void LimparFormulario() {
