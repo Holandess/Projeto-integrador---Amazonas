@@ -33,7 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
                 //System.out.println(p.getDescProduto());
-                System.out.println(p.getNomeProduto());
+                
                 lblNomeProduto.setText(p.getNomeProduto());
                 txtDescricaoProduto.setText(p.getDescProduto());
             }
@@ -175,7 +175,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo do Produto", "Nome Produto", "Categ.", "Valor"
+                "Codigo do Produto", "Nome Produto", "Categ.", "Valor Unitário"
             }
         ));
         jScrollPane2.setViewportView(tblProdutos);
@@ -324,7 +324,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tblCarrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "Codigo do Produto", "Nome Produto", "Qtd", "Valor"
@@ -360,13 +360,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemoveCarrinho)
                     .addComponent(jLabel22)
                     .addComponent(jLabel23))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Formas de pagamento"));
@@ -702,7 +702,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAdicionaCarrinho1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaCarrinho1ActionPerformed
         // TODO add your handling code here:
-        LoadCarrinho(txtQtdProduto.getText());
+        LoadCarrinho(txtQuantidadeCarrinho1.getText());
     }//GEN-LAST:event_btnAdicionaCarrinho1ActionPerformed
 
     /**
@@ -742,15 +742,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public void LoadCarrinho(String qtd) {
 
-        this.listaCarrinho.add(new String[]{String.valueOf(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString()), tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 1).toString(), qtd, tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()});
+        
+        double valor = Double.parseDouble(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()) *  Integer.parseInt(qtd);
+        
+        this.listaCarrinho.add(new String[]{String.valueOf(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString()), tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 1).toString(), qtd, Double.toString(valor)});
         DefaultTableModel tmiTems = new DefaultTableModel();
-        tmiTems.addColumn("Nome Completo");
-        tmiTems.addColumn("CPF");
-        tmiTems.addColumn("E-Mail");
-
-        for (String[] c : listaCarrinho) {
+        tmiTems.addColumn("Codigo do Produto");
+        tmiTems.addColumn("Nome Produto");
+        tmiTems.addColumn("Qtd");
+        tmiTems.addColumn("Valor");
+        for (String[] c : this.listaCarrinho) {
             tmiTems.addRow(c);
         }
+        System.out.println("CLICOU");
 
         tblCarrinho.setModel(tmiTems);
 
@@ -780,7 +784,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tmProdutos.addColumn("Codigo do Produto");
         tmProdutos.addColumn("Nome Produto");
         tmProdutos.addColumn("Categ.");
-        tmProdutos.addColumn("Valor");
+        tmProdutos.addColumn("Valor Unitário");
 
         for (String[] c : linhasProdutos) {
             tmProdutos.addRow(c);
