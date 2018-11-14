@@ -25,6 +25,9 @@ public class SimulaDB {
         listaClientes = new ArrayList<Cliente>();
         listaProdutos = new ArrayList<Produto>();
         listaUsuarios = new ArrayList<Usuario>();
+        Usuario user = new Usuario("Vendedor", "1234", "Vendedor Guilherme", "guilhermevendas@teste.com.br");
+        listaUsuarios.add(user);
+        System.out.println(user.getEmail());
     }
 
     public static synchronized SimulaDB getInstance() {

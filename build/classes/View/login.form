@@ -57,10 +57,10 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
                               <Component id="txtLogin" alignment="2" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="passwordField" alignment="2" min="-2" pref="270" max="-2" attributes="0"/>
+                              <Component id="pwdFIeld" alignment="2" min="-2" pref="270" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jButton1" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="btnLogar" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="261" max="32767" attributes="0"/>
               </Group>
@@ -83,11 +83,11 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="passwordField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="pwdFIeld" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="lbl_password" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="btnLogar" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace pref="170" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -99,7 +99,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Login"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="passwordField">
+        <Component class="javax.swing.JPasswordField" name="pwdFIeld">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Senha"/>
           </Properties>
@@ -128,13 +128,16 @@
             <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnLogar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/View/imgs/logar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Logar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
