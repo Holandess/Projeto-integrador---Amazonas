@@ -1,5 +1,6 @@
 package Model;
 import java.util.UUID;
+import java.util.Random;
 
 public class Produto {
 
@@ -11,7 +12,8 @@ public class Produto {
     private float valorUnitario;
 
     public Produto( int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
-        //this.codProduto = UUID.randomUUID();
+        Random random = new Random();
+        this.codProduto = random.nextInt(1000) + 0;
         this.codProduto = codProduto;
         this.Categoria = Categoria;
         this.nomeProduto = nomeProduto;

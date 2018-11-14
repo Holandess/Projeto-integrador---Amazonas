@@ -32,7 +32,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
                //System.out.println(p.getDescProduto());
                lblNomeProduto.setText(p.getNomeProduto());
-               lblDescricaoProduto.setText(p.getDescProduto());
+               txtDescricaoProduto.setText(p.getDescProduto());
             }
         });
     }
@@ -134,10 +134,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tblProdutos = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         lblNomeProduto = new javax.swing.JLabel();
-        lblDescricaoProduto = new javax.swing.JLabel();
         txtQuantidadeCarrinho1 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         btnAdicionaCarrinho1 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtDescricaoProduto = new javax.swing.JTextArea();
         jLabel21 = new javax.swing.JLabel();
         txtBuscaCliente = new javax.swing.JTextField();
         btnBuscarCliente = new javax.swing.JButton();
@@ -196,41 +197,43 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblNomeProduto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblNomeProduto.setText("Nome Do Produto");
 
-        lblDescricaoProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblDescricaoProduto.setText("Lorem ipsum sit dolor amet,  Lorem ipsum sit dolor amet,lorem ips");
-
         jLabel20.setText("QTD");
 
         btnAdicionaCarrinho1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/plus-16.png"))); // NOI18N
         btnAdicionaCarrinho1.setText("Adicionar");
+
+        txtDescricaoProduto.setEditable(false);
+        txtDescricaoProduto.setBackground(new java.awt.Color(209, 209, 209));
+        txtDescricaoProduto.setColumns(20);
+        txtDescricaoProduto.setLineWrap(true);
+        txtDescricaoProduto.setRows(5);
+        jScrollPane6.setViewportView(txtDescricaoProduto);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNomeProduto)
-                            .addComponent(lblDescricaoProduto))
-                        .addContainerGap(36, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtQuantidadeCarrinho1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdicionaCarrinho1)
-                        .addGap(35, 35, 35))))
+                        .addGap(35, 35, 35))
+                    .addComponent(lblNomeProduto)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(lblNomeProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDescricaoProduto)
-                .addGap(66, 66, 66)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantidadeCarrinho1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
@@ -291,7 +294,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel21)
@@ -323,7 +326,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(49, 49, 49))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Carrinho"));
@@ -612,7 +615,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Estoque de Produtos", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/package.png")), jPanel1); // NOI18N
@@ -625,7 +628,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 745, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Relatorios", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/profits.png")), jPanel10); // NOI18N
@@ -830,9 +833,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JLabel lblDescricaoProduto;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblProdutos;
@@ -840,6 +843,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JTextField txtBuscaProduto;
     private javax.swing.JFormattedTextField txtDescProduto;
+    private javax.swing.JTextArea txtDescricaoProduto;
     private javax.swing.JFormattedTextField txtNomeProduto;
     private javax.swing.JFormattedTextField txtPesquisaProduto;
     private javax.swing.JFormattedTextField txtQtdProduto;
