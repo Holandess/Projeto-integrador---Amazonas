@@ -5,9 +5,13 @@
         <group>
             <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/DAO/SimulaDB.java</file>
             <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/DAO/ProdutoDAO.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Model/Cliente.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Model/Usuario.java</file>
             <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Controller/ClienteController.java</file>
             <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/DAO/ClienteDAO.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Model/Venda.java</file>
             <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Controller/ProdutoController.java</file>
+            <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Model/Pedido.java</file>
             <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/View/TelaPrincipal.java</file>
             <file>file:/C:/Users/enzoa/Desktop/Projeto-integrador---Amazonas/src/Model/Produto.java</file>
         </group>

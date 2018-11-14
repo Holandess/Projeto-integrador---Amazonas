@@ -37,7 +37,8 @@ public class ClienteController {
         ArrayList<String[]> listaClientes = new ArrayList<>();
 
         for (int i = 0; i < clientes.size(); i++) {
-            if (busca.equals(clientes.get(i).getNome()) || busca.equals(clientes.get(i).getCpf().toString())) {
+            System.out.println("BUSCA E " + busca + " e NOME E " + clientes.get(i).getNome());
+            if (clientes.get(i).getNome().contains(busca) || busca.equals(clientes.get(i).getCpf().toString())) {
                 listaClientes.add(new String[]{String.valueOf(clientes.get(i).getNome()), clientes.get(i).getCpf().toString(), String.valueOf(clientes.get(i).getEmail())});
             }
         }
