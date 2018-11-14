@@ -352,7 +352,7 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblValor" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnRemoveCarrinho" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -370,7 +370,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnRemoveCarrinho" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblValor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
@@ -409,12 +409,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel22">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Valor Total"/>
+                    <Property name="text" type="java.lang.String" value="Valor Total R$"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel23">
+                <Component class="javax.swing.JLabel" name="lblValor">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="R$:0.00"/>
+                    <Property name="text" type="java.lang.String" value="0.00"/>
                   </Properties>
                 </Component>
               </SubComponents>

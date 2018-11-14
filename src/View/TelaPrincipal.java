@@ -137,7 +137,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tblCarrinho = new javax.swing.JTable();
         btnRemoveCarrinho = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
+        lblValor = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         btnFinalizaPagamento = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -335,9 +335,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnRemoveCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/cancel-16.png"))); // NOI18N
         btnRemoveCarrinho.setText("Remover");
 
-        jLabel22.setText("Valor Total");
+        jLabel22.setText("Valor Total R$");
 
-        jLabel23.setText("R$:0.00");
+        lblValor.setText("0.00");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -351,7 +351,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23)
+                        .addComponent(lblValor)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoveCarrinho)))
                 .addContainerGap())
@@ -365,7 +365,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemoveCarrinho)
                     .addComponent(jLabel22)
-                    .addComponent(jLabel23))
+                    .addComponent(lblValor))
                 .addGap(66, 66, 66))
         );
 
@@ -744,7 +744,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         
         double valor = Double.parseDouble(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()) *  Integer.parseInt(qtd);
-        
+        lblValor.setText(Double.toString(valor + Double.parseDouble(lblValor.getText())));
         this.listaCarrinho.add(new String[]{String.valueOf(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString()), tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 1).toString(), qtd, Double.toString(valor)});
         DefaultTableModel tmiTems = new DefaultTableModel();
         tmiTems.addColumn("Codigo do Produto");
@@ -851,7 +851,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -871,6 +870,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblNomeProduto;
+    private javax.swing.JLabel lblValor;
     private javax.swing.JTable tblCarrinho;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblProdutos;
