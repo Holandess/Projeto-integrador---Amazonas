@@ -7,26 +7,26 @@ package Model;
 
 /**
  *
- * @author guilherme.gmonteiro3
+ * @author enzo.samorim
  */
 public class Cliente {
 
     private int id;
     private String nome;
     private String email;
-    private int cpf;
+    private Long cpf;
     private String sexo;
     private String endereco;
     private int numero;
     private String complemento;
     private String bairro;
-    private int cep;
+    private Long cep;
     private String cidade;
     private String uf;
-    private int telefone;
-    private int celular;
+    private Long telefone;
+    private Long celular;
 
-    public Cliente(String Nome, String email, int cpf, String sexo,String endereco,int numero,String complemento, String bairro, int cep, String cidade, String uf, int telefone, int celular) {
+    public Cliente(String Nome, String email, Long cpf, String sexo,String endereco,int numero,String complemento, String bairro, Long cep, String cidade, String uf, Long telefone, Long celular) {
         this.nome = Nome;
         this.email = email;
         this.cpf = cpf;
@@ -42,6 +42,38 @@ public class Cliente {
         this.celular = celular;
     }
     
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
     
     public String getNome() {
         return nome;
@@ -59,11 +91,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public int getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 
@@ -83,11 +115,11 @@ public class Cliente {
         this.bairro = bairro;
     }
 
-    public int getCep() {
+    public Long getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(Long cep) {
         this.cep = cep;
     }
 
@@ -107,19 +139,19 @@ public class Cliente {
         this.uf = uf;
     }
 
-    public int getTelefone() {
+    public Long getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(Long telefone) {
         this.telefone = telefone;
     }
 
-    public int getCelular() {
+    public Long getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(Long celular) {
         this.celular = celular;
     }
     

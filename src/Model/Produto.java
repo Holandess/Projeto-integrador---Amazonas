@@ -1,16 +1,19 @@
 package Model;
 
+import java.util.Random;
+
 public class Produto {
 
-    private int idProduto;
+    private int codProduto;
     private String Categoria;
     private String nomeProduto;
     private String descProduto;
     private int qtdProduto;
     private float valorUnitario;
 
-    public Produto(int idProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
-        this.idProduto = idProduto;
+    public Produto(int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
+        Random random = new Random();
+        this.codProduto = random.nextInt(1000) + 0;
         this.Categoria = Categoria;
         this.nomeProduto = nomeProduto;
         this.descProduto = descProduto;
@@ -18,12 +21,15 @@ public class Produto {
         this.valorUnitario = valorUnitario;
     }
 
-    public int getIdProduto() {
-        return idProduto;
+    public Produto() {
     }
 
-    public void setIdProduto(int idProduto) {
-        this.idProduto = idProduto;
+    public int getcodProduto() {
+        return codProduto;
+    }
+
+    public void setcodProduto(int codProduto) {
+        this.codProduto = codProduto;
     }
 
     public String getCategoria() {
