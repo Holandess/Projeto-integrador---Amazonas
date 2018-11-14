@@ -18,20 +18,36 @@ public class ProdutoController {
 
         for (int i = 0; i < produtos.size(); i++) {
             if (busca.equals(produtos.get(i).getcodProduto()) || busca.equals(produtos.get(i).getNomeProduto())) {
-                listaProdutos.add(new String[]{String.valueOf(produtos.get(i).getcodProduto()), produtos.get(i).getNomeProduto(), String.valueOf(produtos.get(i).getCategoria()), String.valueOf(produtos.get(i).getValorUnitario())});
+                listaProdutos.add(new String[]{String.valueOf(
+                    produtos.get(i).getcodProduto()),
+                    produtos.get(i).getNomeProduto(),
+                    String.valueOf(produtos.get(i).getCategoria()),
+                    String.valueOf(produtos.get(i).getValorUnitario())});
             }
         }
 
         return listaProdutos;
     }
 
-    public static ArrayList<String[]> getProdutos() {
+    public static ArrayList<String[]> getProdutosCadastrados(String nomeProduto) {
         ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
         ArrayList<String[]> listaProdutos = new ArrayList<>();
 
         for (int i = 0; i < produtos.size(); i++) {
-            listaProdutos.add(new String[]{String.valueOf(produtos.get(i).getNomeProduto())});
+            if (nomeProduto.equals(produtos.get(i).getcodProduto()) || nomeProduto.equals(produtos.get(i).getNomeProduto())) {
+                listaProdutos.add(new String[]{String.valueOf(
+                    produtos.get(i).getcodProduto()),
+                    produtos.get(i).getNomeProduto(),
+                    String.valueOf(produtos.get(i).getCategoria()),
+                    String.valueOf(produtos.get(i).getValorUnitario())});
+            } else if (nomeProduto == "") {
+                listaProdutos.add(new String[]{String.valueOf(
+                    produtos.get(i).getcodProduto()),
+                    produtos.get(i).getNomeProduto(),
+                    String.valueOf(produtos.get(i).getCategoria()),
+                    String.valueOf(produtos.get(i).getValorUnitario())});
 
+            }
         }
 
         return listaProdutos;
