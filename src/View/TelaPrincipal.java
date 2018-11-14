@@ -797,6 +797,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtVlrUnitarioProd.setEditable(false);
         btnSalvaProduto.setEnabled(false);
         btnCancelaCadastro.setEnabled(false);
+        btnEditaProduto.setEnabled(false);
+        btnExcluiProduto.setEnabled(false);
+        cboCategoriaProduto.setEnabled(false);
     }
 
     public void HabilitarFormulario() {
@@ -806,6 +809,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtVlrUnitarioProd.setEditable(true);
         btnSalvaProduto.setEnabled(true);
         btnCancelaCadastro.setEnabled(true);
+        btnEditaProduto.setEnabled(true);
+        btnExcluiProduto.setEnabled(true);
+        cboCategoriaProduto.setEnabled(true);
     }
 
     public void LoadSearch(String busca) {
@@ -813,6 +819,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ArrayList<String[]> linhasClientes = ClienteController.buscaCliente(busca);
 
         DefaultTableModel tmClientes = new DefaultTableModel();
+        
+        tmClientes.addColumn("Id CLiente");
         tmClientes.addColumn("Nome Completo");
         tmClientes.addColumn("CPF");
         tmClientes.addColumn("E-Mail");

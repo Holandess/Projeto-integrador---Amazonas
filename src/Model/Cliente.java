@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Model;
+import java.util.Random;
 
 /**
  *
@@ -11,7 +12,7 @@ package Model;
  */
 public class Cliente {
 
-    private int id;
+    private int id ;
     private String nome;
     private String email;
     private Long cpf;
@@ -27,6 +28,9 @@ public class Cliente {
     private Long celular;
 
     public Cliente(String Nome, String email, Long cpf, String sexo,String endereco,int numero,String complemento, String bairro, Long cep, String cidade, String uf, Long telefone, Long celular) {
+        
+        Random random = new Random();
+        this.id = random.nextInt(1000) + 0;
         this.nome = Nome;
         this.email = email;
         this.cpf = cpf;
