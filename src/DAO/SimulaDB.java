@@ -18,11 +18,13 @@ public class SimulaDB {
 
     private ArrayList<Cliente> listaClientes; //Simulo a tabela clientes
     private ArrayList<Produto> listaProdutos; //Simulo a tabela Produtos
+    private ArrayList<Usuario> listaUsuarios; //Simulo a tabela Usuarios
 
     private SimulaDB() {
 
         listaClientes = new ArrayList<Cliente>();
         listaProdutos = new ArrayList<Produto>();
+        listaUsuarios = new ArrayList<Usuario>();
     }
 
     public static synchronized SimulaDB getInstance() {
@@ -72,10 +74,10 @@ public class SimulaDB {
 
     public boolean AtualizarProduto(Produto p) {
         for (Produto item : listaProdutos) {
-           // if (item.getId() == p.getId()) {
-           //     item.setNome(p.getNome());
-           //     item.setVlrUnitario(p.getVlrUnitario());
-           // }
+            // if (item.getId() == p.getId()) {
+            //     item.setNome(p.getNome());
+            //     item.setVlrUnitario(p.getVlrUnitario());
+            // }
         }
 
         return true;
@@ -85,6 +87,27 @@ public class SimulaDB {
         listaProdutos.remove(i);
 
         return true;
+    }
+
+    public boolean SalvarUsuario(Usuario u) {
+        listaUsuarios.add(u);
+
+        return true;
+    }
+
+    public boolean logar(String usuario, String senha) {
+        ArrayList<Usuario> usuarios = this.listaUsuarios;
+        ArrayList<String[]> listaUsuarios = new ArrayList<>();
+
+        boolean valid = false;
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuario.equals(String.valueOf(usuarios.get(i).getLogin())) && senha.equals(String.valueOf(usuarios.get(i).getSenha()))) {
+                valid = true;
+            }
+        }
+        
+        return valid;
+        
     }
 
 }
