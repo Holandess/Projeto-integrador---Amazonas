@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
                 //System.out.println(p.getDescProduto());
+                System.out.println(p.getNomeProduto());
                 lblNomeProduto.setText(p.getNomeProduto());
                 txtDescricaoProduto.setText(p.getDescProduto());
             }

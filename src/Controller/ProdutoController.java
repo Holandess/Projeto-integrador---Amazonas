@@ -18,18 +18,12 @@ public class ProdutoController {
 
         for (int i = 0; i < produtos.size(); i++) {
 
-            if (busca.equals(produtos.get(i).getcodProduto()) || busca.equals(produtos.get(i).getNomeProduto())) {
-                listaProdutos.add(new String[]{String.valueOf(
-                    produtos.get(i).getcodProduto()),
-                    produtos.get(i).getNomeProduto(),
-                    String.valueOf(produtos.get(i).getCategoria()),
-                    String.valueOf(produtos.get(i).getValorUnitario())});
 
                 if (busca.equals(produtos.get(i).getcodProduto()) || produtos.get(i).getNomeProduto().contains(busca)) {
                     listaProdutos.add(new String[]{String.valueOf(produtos.get(i).getcodProduto()), produtos.get(i).getNomeProduto(), String.valueOf(produtos.get(i).getCategoria()), String.valueOf(produtos.get(i).getValorUnitario())});
 
                 }
-            }
+            
 
         }
         return listaProdutos;
@@ -44,27 +38,11 @@ public class ProdutoController {
 
         Produto p = new Produto();
         for (int i = 0; i < produtos.size(); i++) {
-
-            if (produtos.equals(produtos.get(i).getcodProduto()) || produtos.equals(produtos.get(i).getNomeProduto())) {
-                listaProdutos.add(new String[]{String.valueOf(
-                    produtos.get(i).getcodProduto()),
-                    produtos.get(i).getNomeProduto(),
-                    String.valueOf(produtos.get(i).getCategoria()),
-                    String.valueOf(produtos.get(i).getValorUnitario())});
-            } else if (produtos.equals(produtos.get(i).getNomeProduto()== (" "))) {
-                listaProdutos.add(new String[]{String.valueOf(
-                    produtos.get(i).getcodProduto()),
-                    produtos.get(i).getNomeProduto(),
-                    String.valueOf(produtos.get(i).getCategoria()),
-                    String.valueOf(produtos.get(i).getValorUnitario())});
-
                 if (idProduto.equals(String.valueOf(produtos.get(i).getcodProduto()))) {
                     p = produtos.get(i);
 
                 }
             }
-
-        }
         return p;
 
     }
