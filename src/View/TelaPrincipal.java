@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    private ArrayList<String[]> listaCarrinho;
+
     /**
      * Creates new form TelaPrincipal
      */
@@ -30,11 +32,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tblProdutos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
-               //System.out.println(p.getDescProduto());
-               lblNomeProduto.setText(p.getNomeProduto());
-               txtDescricaoProduto.setText(p.getDescProduto());
+                //System.out.println(p.getDescProduto());
+                lblNomeProduto.setText(p.getNomeProduto());
+                txtDescricaoProduto.setText(p.getDescProduto());
             }
         });
+        this.listaCarrinho = new ArrayList<>();
+
     }
 
     public void LimparFormularioCadProduto() {
@@ -47,7 +51,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private boolean ValidarFormulario() {
 
-       
         boolean pass = true;
         if (this.txtNomeProduto.getText().equalsIgnoreCase("")) {
             txtNomeProduto.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -130,7 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnCadastrarCliente = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblCarrinho = new javax.swing.JTable();
         btnRemoveCarrinho = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -168,7 +171,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "Codigo do Produto", "Nome Produto", "Categ.", "Valor"
@@ -183,6 +186,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnAdicionaCarrinho1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/plus-16.png"))); // NOI18N
         btnAdicionaCarrinho1.setText("Adicionar");
+        btnAdicionaCarrinho1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionaCarrinho1ActionPerformed(evt);
+            }
+        });
 
         txtDescricaoProduto.setEditable(false);
         txtDescricaoProduto.setBackground(new java.awt.Color(209, 209, 209));
@@ -235,7 +243,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
                 "Nome Completo", "CPF", "E-Mail"
@@ -313,7 +321,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Carrinho"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblCarrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -321,7 +329,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 "Codigo do Produto", "Nome Produto", "Qtd", "Valor"
             }
         ));
-        jScrollPane5.setViewportView(jTable2);
+        jScrollPane5.setViewportView(tblCarrinho);
 
         btnRemoveCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/cancel-16.png"))); // NOI18N
         btnRemoveCarrinho.setText("Remover");
@@ -691,6 +699,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cdCliente.setDefaultCloseOperation(cadastroCliente.DISPOSE_ON_CLOSE); // para fechar apenas a tela secundaria
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
+    private void btnAdicionaCarrinho1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaCarrinho1ActionPerformed
+        // TODO add your handling code here:
+        LoadCarrinho(txtQtdProduto.getText());
+    }//GEN-LAST:event_btnAdicionaCarrinho1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -724,6 +737,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 new TelaPrincipal().setVisible(true);
             }
         });
+    }
+
+    public void LoadCarrinho(String qtd) {
+
+        this.listaCarrinho.add(new String[]{String.valueOf(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString()), tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 1).toString(), qtd, tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()});
+        DefaultTableModel tmiTems = new DefaultTableModel();
+        tmiTems.addColumn("Nome Completo");
+        tmiTems.addColumn("CPF");
+        tmiTems.addColumn("E-Mail");
+
+        for (String[] c : listaCarrinho) {
+            tmiTems.addRow(c);
+        }
+
+        tblCarrinho.setModel(tmiTems);
+
     }
 
     public void LoadSearch(String busca) {
@@ -778,17 +807,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tblClientes.setModel(tmClientes);
     }
 
-
     public void LoadTableProdutos() {
-        
+
         ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos(txtBuscaProduto.getText());
 
         DefaultTableModel tmProdutos = new DefaultTableModel();
         tmProdutos.addColumn("Código Produto");
         tmProdutos.addColumn("Nome ");
         tmProdutos.addColumn("Categoria");
-        tmProdutos.addColumn("Valor Unitario"); 
-         for (String[] c : linhasProdutos) {
+        tmProdutos.addColumn("Valor Unitario");
+        for (String[] c : linhasProdutos) {
             tmProdutos.addRow(c);
         }
 
@@ -837,8 +865,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblNomeProduto;
+    private javax.swing.JTable tblCarrinho;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTable tblProdutosCadastrados;

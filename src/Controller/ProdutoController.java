@@ -35,12 +35,6 @@ public class ProdutoController {
         return listaProdutos;
     }
 
-    public static ArrayList<String[]> getProdutosCadastrados(String nomeProduto) {
-      
-        
-        return null;
-
-    }
 
     public static Produto getProdutoById(String idProduto) {
         //FProduto p = new Produto();
