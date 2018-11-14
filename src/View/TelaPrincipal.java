@@ -23,12 +23,14 @@ import javax.swing.table.DefaultTableModel;
 public class TelaPrincipal extends javax.swing.JFrame {
 
     private ArrayList<String[]> listaCarrinho;
+    private String modoTela;
 
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
         initComponents();
+        DesabilitarFormulario();
         tblProdutos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
@@ -53,6 +55,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private boolean ValidarFormulario() {
 
         boolean pass = true;
+        
+        if (this.cboCategoriaProduto.getSelectedIndex() == 0) {
+            cboCategoriaProduto.setBorder(BorderFactory.createLineBorder(Color.red));
+            pass = false;
+        } else {
+            cboCategoriaProduto.setBorder(BorderFactory.createEmptyBorder());
+        }
+        
         if (this.txtNomeProduto.getText().equalsIgnoreCase("")) {
             txtNomeProduto.setBorder(BorderFactory.createLineBorder(Color.red));
             pass = false;
@@ -443,6 +453,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnNovoProduto.setMaximumSize(new java.awt.Dimension(55, 23));
         btnNovoProduto.setMinimumSize(new java.awt.Dimension(55, 23));
         btnNovoProduto.setPreferredSize(new java.awt.Dimension(62, 23));
+        btnNovoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoProdutoActionPerformed(evt);
+            }
+        });
 
         btnSalvaProduto.setText("Salvar");
         btnSalvaProduto.setMaximumSize(new java.awt.Dimension(55, 23));
@@ -662,6 +677,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Produto Cadastrado com sucesso!!");
             ProdutoController.Salvar(p);
+            LimparFormularioCadProduto();
 
         } else {
             JOptionPane.showMessageDialog(this, "Preencher corretamente os campos ! ");
@@ -704,6 +720,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoadCarrinho(txtQtdProduto.getText());
     }//GEN-LAST:event_btnAdicionaCarrinho1ActionPerformed
+
+    private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
+        modoTela = "Criar";
+        HabilitarFormulario();
+        LimparFormulario();
+
+    }//GEN-LAST:event_btnNovoProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -754,6 +777,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tblCarrinho.setModel(tmiTems);
 
+    }
+
+    public void LimparFormulario() {
+        txtNomeProduto.setText("");
+        txtDescProduto.setText("");
+        txtQtdProduto.setText("");
+        txtVlrUnitarioProd.setText("");
+    }
+
+    public void DesabilitarFormulario() {
+        txtNomeProduto.setEditable(false);
+        txtDescProduto.setEditable(false);
+        txtQtdProduto.setEditable(false);
+        txtVlrUnitarioProd.setEditable(false);
+        btnSalvaProduto.setEnabled(false);
+        btnCancelaCadastro.setEnabled(false);
+    }
+
+    public void HabilitarFormulario() {
+        txtNomeProduto.setEditable(true);
+        txtDescProduto.setEditable(true);
+        txtQtdProduto.setEditable(true);
+        txtVlrUnitarioProd.setEditable(true);
+        btnSalvaProduto.setEnabled(true);
+        btnCancelaCadastro.setEnabled(true);
     }
 
     public void LoadSearch(String busca) {

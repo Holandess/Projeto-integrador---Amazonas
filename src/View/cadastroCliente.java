@@ -29,6 +29,21 @@ public class cadastroCliente extends javax.swing.JFrame {
         boolean pass = true;
 
 
+        
+         if (this.cboSexo.getSelectedIndex() == 0) {
+            cboSexo.setBorder(BorderFactory.createLineBorder(Color.red));
+            pass = false;
+        } else {
+            cboSexo.setBorder(BorderFactory.createEmptyBorder());
+        }
+        
+         if (this.cboUF.getSelectedIndex() == 0) {
+            cboUF.setBorder(BorderFactory.createLineBorder(Color.red));
+            pass = false;
+        } else {
+            cboUF.setBorder(BorderFactory.createEmptyBorder());
+        }
+        
         if (this.txtNome.getText().equalsIgnoreCase("")) {
             //COLOCA A COR VERMELHA NO CAMPO
             txtNome.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -141,7 +156,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        cbUF = new javax.swing.JComboBox<>();
+        cboUF = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -149,7 +164,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         btnSalvarCliente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        cbSexo = new javax.swing.JComboBox<>();
+        cboSexo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,10 +201,10 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jLabel13.setText("UF: ");
 
-        cbUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PE", "PI", "RN", "RS", "RJ", "RO", "RR", "SC", "SP", "SE", "TO" }));
-        cbUF.addActionListener(new java.awt.event.ActionListener() {
+        cboUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PE", "PI", "RN", "RS", "RJ", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cboUF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUFActionPerformed(evt);
+                cboUFActionPerformed(evt);
             }
         });
 
@@ -221,10 +236,10 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jLabel6.setText("Sexo:");
 
-        cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Masculino", "Feminino" }));
-        cbSexo.addActionListener(new java.awt.event.ActionListener() {
+        cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Masculino", "Feminino" }));
+        cboSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSexoActionPerformed(evt);
+                cboSexoActionPerformed(evt);
             }
         });
 
@@ -278,7 +293,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,7 +303,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cboUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(txtCelular))))))
                 .addContainerGap())
@@ -307,7 +322,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -327,7 +342,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -378,9 +393,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUFActionPerformed
+    private void cboUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboUFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbUFActionPerformed
+    }//GEN-LAST:event_cboUFActionPerformed
 
     private void txtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairroActionPerformed
         // TODO add your handling code here:
@@ -394,9 +409,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneActionPerformed
 
-    private void cbSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSexoActionPerformed
+    private void cboSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSexoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbSexoActionPerformed
+    }//GEN-LAST:event_cboSexoActionPerformed
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         // TODO add your handling code here:
@@ -404,14 +419,14 @@ public class cadastroCliente extends javax.swing.JFrame {
             Cliente c = new Cliente(txtNome.getText(),
                     txtEmail.getText(),
                     Long.parseLong(this.txtCPF.getText()),
-                    cbSexo.getSelectedItem().toString(),
+                    cboSexo.getSelectedItem().toString(),
                     txtEndereco.getText(),
                     Integer.parseInt(this.txtNumero.getText()),
                     txtComp.getText(),
                     txtBairro.getText(),
                     Long.parseLong(this.txtCEP.getText()),
                     txtCidade.getText(),
-                    cbUF.getSelectedItem().toString(),
+                    cboUF.getSelectedItem().toString(),
                     Long.parseLong(this.txtTelefone.getText()),
                     Long.parseLong(this.txtCelular.getText())
             );
@@ -467,8 +482,8 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvarCliente;
-    private javax.swing.JComboBox<String> cbSexo;
-    private javax.swing.JComboBox<String> cbUF;
+    private javax.swing.JComboBox<String> cboSexo;
+    private javax.swing.JComboBox<String> cboUF;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
