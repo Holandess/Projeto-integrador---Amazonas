@@ -19,7 +19,8 @@ public class SimulaDB {
     private ArrayList<Cliente> listaClientes; //Simulo a tabela clientes
     private ArrayList<Produto> listaProdutos; //Simulo a tabela Produtos
     private ArrayList<Usuario> listaUsuarios; //Simulo a tabela Usuarios
-
+    private ArrayList<Pedido>  listaPedidos; //Simulo a tabala Pedidos
+ 
     private SimulaDB() {
 
         listaClientes = new ArrayList<Cliente>();
@@ -112,6 +113,10 @@ public class SimulaDB {
         
         return valid;
         
+    }
+
+    boolean SalvarPedido(Pedido p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

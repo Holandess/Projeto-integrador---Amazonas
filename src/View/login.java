@@ -42,6 +42,11 @@ public class login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtLogin.setToolTipText("Login");
+        txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoginKeyPressed(evt);
+            }
+        });
 
         pwdFIeld.setToolTipText("Senha");
         pwdFIeld.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -134,12 +139,12 @@ public class login extends javax.swing.JFrame {
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
         // TODO add your handling code here:
-        if(UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())){
+        if (UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())) {
             TelaPrincipal tela = new TelaPrincipal();
             tela.setLocationRelativeTo(null);
             tela.setVisible(true);
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
         }
     }//GEN-LAST:event_btnLogarActionPerformed
@@ -150,21 +155,32 @@ public class login extends javax.swing.JFrame {
 
     private void pwdFIeldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwdFIeldKeyPressed
 
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-         if(UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())){
-            TelaPrincipal tela = new TelaPrincipal();
-            tela.setLocationRelativeTo(null);
-            tela.setVisible(true);
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
-        }
-        
-        
-        
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())) {
+                TelaPrincipal tela = new TelaPrincipal();
+                tela.setLocationRelativeTo(null);
+                tela.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
+            }
+
         }
     }//GEN-LAST:event_pwdFIeldKeyPressed
+
+    private void txtLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())) {
+                TelaPrincipal tela = new TelaPrincipal();
+                tela.setLocationRelativeTo(null);
+                tela.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
+            }
+
+        }
+    }//GEN-LAST:event_txtLoginKeyPressed
 
     /**
      * @param args the command line arguments

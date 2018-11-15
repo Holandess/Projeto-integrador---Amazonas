@@ -34,7 +34,7 @@ public class ProdutoController {
         //FProduto p = new Produto();
 
         ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
-        ArrayList<String[]> listaProdutos = new ArrayList<>();
+       
 
         Produto p = new Produto();
         for (int i = 0; i < produtos.size(); i++) {

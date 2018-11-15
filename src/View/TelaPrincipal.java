@@ -7,7 +7,9 @@ package View;
 
 import Controller.ClienteController;
 import Controller.ProdutoController;
+import Model.Pedido;
 import Model.Produto;
+import Model.Venda;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -35,7 +37,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
                 //System.out.println(p.getDescProduto());
-                
+
                 lblNomeProduto.setText(p.getNomeProduto());
                 txtDescricaoProduto.setText(p.getDescProduto());
             }
@@ -55,14 +57,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private boolean ValidarFormulario() {
 
         boolean pass = true;
-        
+
         if (this.cboCategoriaProduto.getSelectedIndex() == 0) {
             cboCategoriaProduto.setBorder(BorderFactory.createLineBorder(Color.red));
             pass = false;
         } else {
             cboCategoriaProduto.setBorder(BorderFactory.createEmptyBorder());
         }
-        
+
         if (this.txtNomeProduto.getText().equalsIgnoreCase("")) {
             txtNomeProduto.setBorder(BorderFactory.createLineBorder(Color.red));
             pass = false;
@@ -150,7 +152,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblValor = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         btnFinalizaPagamento = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboFormadepagamento = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -261,7 +263,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome Completo", "CPF", "E-Mail"
+                "ID Cliente", "Nome Completo", "CPF", "E-Mail"
             }
         ));
         jScrollPane4.setViewportView(tblClientes);
@@ -348,6 +350,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnRemoveCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/delete-16.png"))); // NOI18N
         btnRemoveCarrinho.setText("Remover");
+        btnRemoveCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveCarrinhoActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("Valor Total R$");
 
@@ -393,7 +400,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Cartão de Crédito", "Cartão de Debito", "Boleto" }));
+        cboFormadepagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Cartão de Crédito", "Cartão de Debito", "Boleto" }));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -401,7 +408,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboFormadepagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(btnFinalizaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72))
@@ -411,7 +418,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboFormadepagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFinalizaPagamento))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -610,7 +617,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnExcluiProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSalvaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -738,7 +745,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAdicionaCarrinho1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaCarrinho1ActionPerformed
         // TODO add your handling code here:
-        LoadCarrinho(txtQuantidadeCarrinho1.getText());
+        addCarrinho(txtQuantidadeCarrinho1.getText());
     }//GEN-LAST:event_btnAdicionaCarrinho1ActionPerformed
 
     private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
@@ -748,8 +755,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
 
-    private void btnFinalizaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizaPagamentoActionPerformed
 
+    private void btnRemoveCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveCarrinhoActionPerformed
+        if (tblCarrinho.getRowCount() > 0) {
+
+            listaCarrinho.remove(tblCarrinho.getSelectedRow());
+            LoadCarrinhoRemove();
+        }
+    }//GEN-LAST:event_btnRemoveCarrinhoActionPerformed
+
+    private void btnFinalizaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizaPagamentoActionPerformed
+        // TODO add your handling code here:
+        int idCliente = Integer.parseInt(tblClientes.getValueAt(tblClientes.getSelectedRow(), 0).toString());
+        String formaPagamento = cboFormadepagamento.getSelectedItem().toString();
+        
+        Venda v = new Venda(Double.parseDouble(lblValor.getText()), formaPagamento, idCliente);
+        
+        for (int i = 0; i < listaCarrinho.size(); i++) {
+            Pedido p = new Pedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]));
+        }
+        
+        
+       
     }//GEN-LAST:event_btnFinalizaPagamentoActionPerformed
 
     /**
@@ -787,10 +814,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    public void LoadCarrinho(String qtd) {
+    public void addCarrinho(String qtd) {
 
-        
-        double valor = Double.parseDouble(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()) *  Integer.parseInt(qtd);
+        double valor = Double.parseDouble(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString()) * Integer.parseInt(qtd);
         lblValor.setText(Double.toString(valor + Double.parseDouble(lblValor.getText())));
         this.listaCarrinho.add(new String[]{String.valueOf(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString()), tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 1).toString(), qtd, Double.toString(valor)});
         DefaultTableModel tmiTems = new DefaultTableModel();
@@ -807,6 +833,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }
 
+    public void LoadCarrinhoRemove() {
+        
+        DefaultTableModel tmiTems = new DefaultTableModel();
+        tmiTems.addColumn("Codigo do Produto");
+        tmiTems.addColumn("Nome Produto");
+        tmiTems.addColumn("Qtd");
+        tmiTems.addColumn("Valor");
+        for (String[] c : this.listaCarrinho) {
+            tmiTems.addRow(c);
+        }
+        
+        double total = Double.parseDouble(lblValor.getText()) - Double.parseDouble(tblCarrinho.getValueAt(tblCarrinho.getSelectedRow(), 3).toString());
+        lblValor.setText(Double.toString(total));
+        tblCarrinho.setModel(tmiTems);
+        
+    }
+
     public void LimparFormulario() {
         txtNomeProduto.setText("");
         txtDescProduto.setText("");
@@ -821,6 +864,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtVlrUnitarioProd.setEditable(false);
         btnSalvaProduto.setEnabled(false);
         btnCancelaCadastro.setEnabled(false);
+        btnEditaProduto.setEnabled(false);
+        btnExcluiProduto.setEnabled(false);
+        cboCategoriaProduto.setEnabled(false);
     }
 
     public void HabilitarFormulario() {
@@ -830,6 +876,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtVlrUnitarioProd.setEditable(true);
         btnSalvaProduto.setEnabled(true);
         btnCancelaCadastro.setEnabled(true);
+        btnEditaProduto.setEnabled(true);
+        btnExcluiProduto.setEnabled(true);
+        cboCategoriaProduto.setEnabled(true);
     }
 
     public void LoadSearch(String busca) {
@@ -837,6 +886,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ArrayList<String[]> linhasClientes = ClienteController.buscaCliente(busca);
 
         DefaultTableModel tmClientes = new DefaultTableModel();
+        
+        tmClientes.addColumn("ID Cliente");
         tmClientes.addColumn("Nome Completo");
         tmClientes.addColumn("CPF");
         tmClientes.addColumn("E-Mail");
@@ -916,7 +967,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoveCarrinho;
     private javax.swing.JButton btnSalvaProduto;
     private javax.swing.JComboBox<String> cboCategoriaProduto;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cboFormadepagamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
