@@ -19,17 +19,20 @@ public class SimulaDB {
     private ArrayList<Cliente> listaClientes; //Simulo a tabela clientes
     private ArrayList<Produto> listaProdutos; //Simulo a tabela Produtos
     private ArrayList<Usuario> listaUsuarios; //Simulo a tabela Usuarios
-    private ArrayList<Pedido>  listaPedidos; //Simulo a tabala Pedidos
- 
+    private ArrayList<Pedido> listaPedidos; //Simulo a tabela Pedidos
+    private ArrayList<Venda> listaVenda; //Simulo a tabela Vendas
+
     private SimulaDB() {
 
         listaClientes = new ArrayList<Cliente>();
         listaProdutos = new ArrayList<Produto>();
         listaUsuarios = new ArrayList<Usuario>();
-        
+        listaPedidos = new ArrayList<Pedido>();
+        listaVenda = new ArrayList<Venda>();
+
         Usuario user = new Usuario("Vendedor", "1234", "Vendedor Guilherme", "guilhermevendas@teste.com.br");
         listaUsuarios.add(user);
-        
+
     }
 
     public static synchronized SimulaDB getInstance() {
@@ -110,13 +113,29 @@ public class SimulaDB {
                 valid = true;
             }
         }
-        
+
         return valid;
-        
+
     }
 
-    boolean SalvarPedido(Pedido p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean SalvarPedido(Pedido p) { //Enzo
+        listaPedidos.add(p);
+
+        return true;
+    }
+
+    public ArrayList<Pedido> getPedidos() { //Enzo
+        return this.listaPedidos;
+    }
+
+    boolean SalvarVenda(Venda v) {
+        listaVenda.add(v);
+
+        return true;
+    }
+    
+    public ArrayList<Venda> getVenda() { //Enzo
+        return this.listaVenda;
     }
 
 }

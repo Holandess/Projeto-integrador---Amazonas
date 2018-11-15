@@ -759,6 +759,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Pedido p = new Pedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]));
         }
         
+        JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso !");
         
         
     }//GEN-LAST:event_btnFinalizaPagamentoActionPerformed
