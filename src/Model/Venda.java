@@ -1,20 +1,21 @@
 package Model;
 
+import java.util.Random;
+
 public class Venda {
 
     private int idVenda;
-    private float valorVenda;
+    private double valorVenda;
     private String meioDePagamento;
-    private String nomeCliente;
-    private String enderecoCliente;
+    private int idCliente;
 
-    public Venda(int idVenda, float valorVenda, String meioDePagamento, String nomeCliente, String enderecoCliente) {
+    public Venda(double valorVenda, String meioDePagamento, int idCliente) {
 
-        this.idVenda = idVenda;
+        Random random = new Random();
+        this.idVenda = random.nextInt(1000) + 0;
         this.valorVenda = valorVenda;
         this.meioDePagamento = meioDePagamento;
-        this.nomeCliente = nomeCliente;
-        this.enderecoCliente = enderecoCliente;
+        this.idCliente = idCliente;
 
     }
 
@@ -26,7 +27,7 @@ public class Venda {
         this.idVenda = idVenda;
     }
 
-    public float getValorVenda() {
+    public double getValorVenda() {
         return valorVenda;
     }
 
@@ -42,20 +43,14 @@ public class Venda {
         this.meioDePagamento = meioDePagamento;
     }
 
-    public String getNomeCliente() {
-        return nomeCliente;
+    public int getNomeCliente() {
+        return idCliente;
     }
 
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
+    public void setNomeCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public String getEnderecoCliente() {
-        return enderecoCliente;
-    }
 
-    public void setEnderecoCliente(String enderecoCliente) {
-        this.enderecoCliente = enderecoCliente;
-    }
 
 }

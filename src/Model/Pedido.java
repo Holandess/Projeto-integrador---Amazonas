@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Random;
+
 /**
  *
  * @author enzo.samorim
@@ -14,16 +16,14 @@ public class Pedido {
     private int id;
     private int idVenda;
     private int idProduto;
-    private String nomeCliente;
-    private String valorPedido;
 
-    public Pedido(int id, int idVenda, int idProduto, String nomeCliente, String valorPedido) {
+    public Pedido(int idVenda, int idProduto) {
 
-        this.id = id;
+        Random random = new Random();
+        this.id = random.nextInt(1000) + 0;
         this.idVenda = idVenda;
         this.idProduto = idProduto;
-        this.nomeCliente = nomeCliente;
-        this.valorPedido = valorPedido;
+
 
     }
 
@@ -49,22 +49,6 @@ public class Pedido {
 
     public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
-    }
-
-    public String getNomeCliente() {
-        return nomeCliente;
-    }
-
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
-    }
-
-    public String getValorPedido() {
-        return valorPedido;
-    }
-
-    public void setValorPedido(String valorPedido) {
-        this.valorPedido = valorPedido;
     }
 
 }

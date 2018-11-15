@@ -7,7 +7,9 @@ package View;
 
 import Controller.ClienteController;
 import Controller.ProdutoController;
+import Model.Pedido;
 import Model.Produto;
+import Model.Venda;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -150,7 +152,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblValor = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         btnFinalizaPagamento = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboFormadepagamento = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -257,7 +259,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome Completo", "CPF", "E-Mail"
+                "ID Cliente", "Nome Completo", "CPF", "E-Mail"
             }
         ));
         jScrollPane4.setViewportView(tblClientes);
@@ -387,8 +389,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Formas de pagamento"));
 
         btnFinalizaPagamento.setText("Finalizar pagamento");
+        btnFinalizaPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizaPagamentoActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Cartão de Crédito", "Cartão de Debito", "Boleto" }));
+        cboFormadepagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Cartão de Crédito", "Cartão de Debito", "Boleto" }));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -396,7 +403,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboFormadepagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(btnFinalizaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72))
@@ -406,7 +413,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboFormadepagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFinalizaPagamento))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -741,6 +748,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoveCarrinhoActionPerformed
 
+    private void btnFinalizaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizaPagamentoActionPerformed
+        // TODO add your handling code here:
+        int idCliente = Integer.parseInt(tblClientes.getValueAt(tblClientes.getSelectedRow(), 0).toString());
+        String formaPagamento = cboFormadepagamento.getSelectedItem().toString();
+        
+        Venda v = new Venda(Double.parseDouble(lblValor.getText()), formaPagamento, idCliente);
+        
+        for (int i = 0; i < listaCarrinho.size(); i++) {
+            Pedido p = new Pedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]));
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnFinalizaPagamentoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -849,7 +871,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         DefaultTableModel tmClientes = new DefaultTableModel();
         
-        tmClientes.addColumn("Id CLiente");
+        tmClientes.addColumn("ID Cliente");
         tmClientes.addColumn("Nome Completo");
         tmClientes.addColumn("CPF");
         tmClientes.addColumn("E-Mail");
@@ -929,7 +951,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoveCarrinho;
     private javax.swing.JButton btnSalvaProduto;
     private javax.swing.JComboBox<String> cboCategoriaProduto;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cboFormadepagamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
