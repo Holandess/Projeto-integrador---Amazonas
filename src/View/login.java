@@ -6,6 +6,7 @@
 package View;
 
 import Controller.UsuarioController;
+import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,6 +44,11 @@ public class login extends javax.swing.JFrame {
         txtLogin.setToolTipText("Login");
 
         pwdFIeld.setToolTipText("Senha");
+        pwdFIeld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pwdFIeldKeyPressed(evt);
+            }
+        });
 
         lbl_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/username.png"))); // NOI18N
         lbl_login.setText("LOGIN");
@@ -58,6 +64,11 @@ public class login extends javax.swing.JFrame {
         btnLogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogarActionPerformed(evt);
+            }
+        });
+        btnLogar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLogarKeyPressed(evt);
             }
         });
 
@@ -132,6 +143,28 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
         }
     }//GEN-LAST:event_btnLogarActionPerformed
+
+    private void btnLogarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogarKeyPressed
+
+    private void pwdFIeldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwdFIeldKeyPressed
+
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+         if(UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())){
+            TelaPrincipal tela = new TelaPrincipal();
+            tela.setLocationRelativeTo(null);
+            tela.setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
+        }
+        
+        
+        
+        
+        }
+    }//GEN-LAST:event_pwdFIeldKeyPressed
 
     /**
      * @param args the command line arguments
