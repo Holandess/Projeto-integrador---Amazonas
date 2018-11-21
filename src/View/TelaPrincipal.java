@@ -491,6 +491,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnEditaProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/edit-16.png"))); // NOI18N
         btnEditaProduto.setText("Editar");
         btnEditaProduto.setPreferredSize(new java.awt.Dimension(62, 23));
+        btnEditaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditaProdutoActionPerformed(evt);
+            }
+        });
 
         btnExcluiProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/delete-16.png"))); // NOI18N
         btnExcluiProduto.setText("Excluir");
@@ -779,6 +784,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
        
     }//GEN-LAST:event_btnFinalizaPagamentoActionPerformed
+
+    private void btnEditaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaProdutoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnEditaProdutoActionPerformed
 
     /**
      * @param args the command line arguments
