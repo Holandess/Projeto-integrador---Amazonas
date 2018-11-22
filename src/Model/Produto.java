@@ -1,5 +1,6 @@
 package Model;
-import java.util.UUID;
+
+import java.util.Random;
 
 public class Produto {
 
@@ -10,27 +11,18 @@ public class Produto {
     private int qtdProduto;
     private float valorUnitario;
 
-    public Produto( int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
-        //this.codProduto = UUID.randomUUID();
-        this.codProduto = codProduto;
+    public Produto(int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
+        Random random = new Random();
+        this.codProduto = random.nextInt(1000) + 0;
         this.Categoria = Categoria;
         this.nomeProduto = nomeProduto;
         this.descProduto = descProduto;
         this.qtdProduto = qtdProduto;
         this.valorUnitario = valorUnitario;
     }
-    
-    public Produto(){
-    }
 
-    
-   /* public Produto(String toString) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Produto() {
     }
-
-    public Produto(String toString, String text, String text0, String text1, String text2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
 
     public int getcodProduto() {
         return codProduto;

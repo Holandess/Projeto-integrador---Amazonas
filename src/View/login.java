@@ -5,6 +5,10 @@
  */
 package View;
 
+import Controller.UsuarioController;
+//import com.sun.glass.events.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author guilherme.gmonteiro3
@@ -29,17 +33,27 @@ public class login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         txtLogin = new javax.swing.JTextField();
-        passwordField = new javax.swing.JPasswordField();
+        pwdFIeld = new javax.swing.JPasswordField();
         lbl_login = new javax.swing.JLabel();
         lbl_password = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnLogar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtLogin.setToolTipText("Login");
+        txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoginKeyPressed(evt);
+            }
+        });
 
-        passwordField.setToolTipText("Senha");
+        pwdFIeld.setToolTipText("Senha");
+        pwdFIeld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pwdFIeldKeyPressed(evt);
+            }
+        });
 
         lbl_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/username.png"))); // NOI18N
         lbl_login.setText("LOGIN");
@@ -50,8 +64,18 @@ public class login extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/_username_login_1172579.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/logar.png"))); // NOI18N
-        jButton1.setText("Logar");
+        btnLogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/logar.png"))); // NOI18N
+        btnLogar.setText("Logar");
+        btnLogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogarActionPerformed(evt);
+            }
+        });
+        btnLogar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLogarKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,8 +91,8 @@ public class login extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pwdFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnLogar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(261, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -86,10 +110,10 @@ public class login extends javax.swing.JFrame {
                     .addComponent(lbl_login))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pwdFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_password))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(170, Short.MAX_VALUE))
         );
 
@@ -112,6 +136,30 @@ public class login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
+        // TODO add your handling code here:
+        if (UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())) {
+            TelaPrincipal tela = new TelaPrincipal();
+            tela.setLocationRelativeTo(null);
+            tela.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
+        }
+    }//GEN-LAST:event_btnLogarActionPerformed
+
+    private void btnLogarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogarKeyPressed
+
+    private void pwdFIeldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwdFIeldKeyPressed
+
+    }//GEN-LAST:event_pwdFIeldKeyPressed
+
+    private void txtLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginKeyPressed
+
+    }//GEN-LAST:event_txtLoginKeyPressed
 
     /**
      * @param args the command line arguments
@@ -149,12 +197,12 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLogar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_login;
     private javax.swing.JLabel lbl_password;
-    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JPasswordField pwdFIeld;
     private javax.swing.JTextField txtLogin;
     // End of variables declaration//GEN-END:variables
 }

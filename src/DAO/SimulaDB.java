@@ -18,11 +18,21 @@ public class SimulaDB {
 
     private ArrayList<Cliente> listaClientes; //Simulo a tabela clientes
     private ArrayList<Produto> listaProdutos; //Simulo a tabela Produtos
+    private ArrayList<Usuario> listaUsuarios; //Simulo a tabela Usuarios
+    private ArrayList<Pedido> listaPedidos; //Simulo a tabela Pedidos
+    private ArrayList<Venda> listaVenda; //Simulo a tabela Vendas
 
     private SimulaDB() {
 
         listaClientes = new ArrayList<Cliente>();
         listaProdutos = new ArrayList<Produto>();
+        listaUsuarios = new ArrayList<Usuario>();
+        listaPedidos = new ArrayList<Pedido>();
+        listaVenda = new ArrayList<Venda>();
+
+        Usuario user = new Usuario("Vendedor", "1234", "Vendedor Guilherme", "guilhermevendas@teste.com.br");
+        listaUsuarios.add(user);
+
     }
 
     public static synchronized SimulaDB getInstance() {
@@ -72,10 +82,10 @@ public class SimulaDB {
 
     public boolean AtualizarProduto(Produto p) {
         for (Produto item : listaProdutos) {
-           // if (item.getId() == p.getId()) {
-           //     item.setNome(p.getNome());
-           //     item.setVlrUnitario(p.getVlrUnitario());
-           // }
+            // if (item.getId() == p.getId()) {
+            //     item.setNome(p.getNome());
+            //     item.setVlrUnitario(p.getVlrUnitario());
+            // }
         }
 
         return true;
@@ -85,6 +95,47 @@ public class SimulaDB {
         listaProdutos.remove(i);
 
         return true;
+    }
+
+    public boolean SalvarUsuario(Usuario u) {
+        listaUsuarios.add(u);
+
+        return true;
+    }
+
+    public boolean logar(String usuario, String senha) {
+        ArrayList<Usuario> usuarios = this.listaUsuarios;
+        ArrayList<String[]> listaUsuarios = new ArrayList<>();
+
+        boolean valid = false;
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuario.equals(String.valueOf(usuarios.get(i).getLogin())) && senha.equals(String.valueOf(usuarios.get(i).getSenha()))) {
+                valid = true;
+            }
+        }
+
+        return valid;
+
+    }
+
+    public boolean SalvarPedido(Pedido p) { //Enzo
+        listaPedidos.add(p);
+
+        return true;
+    }
+
+    public ArrayList<Pedido> getPedidos() { //Enzo
+        return this.listaPedidos;
+    }
+
+    boolean SalvarVenda(Venda v) {
+        listaVenda.add(v);
+
+        return true;
+    }
+    
+    public ArrayList<Venda> getVenda() { //Enzo
+        return this.listaVenda;
     }
 
 }

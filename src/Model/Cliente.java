@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 package Model;
+import java.util.Random;
 
 /**
  *
- * @author guilherme.gmonteiro3
+ * @author enzo.samorim
  */
 public class Cliente {
 
-    private int id;
+    private int id ;
     private String nome;
     private String email;
     private Long cpf;
@@ -27,6 +28,7 @@ public class Cliente {
     private Long celular;
 
     public Cliente(String Nome, String email, Long cpf, String sexo,String endereco,int numero,String complemento, String bairro, Long cep, String cidade, String uf, Long telefone, Long celular) {
+        
         this.nome = Nome;
         this.email = email;
         this.cpf = cpf;
