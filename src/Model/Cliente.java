@@ -29,8 +29,6 @@ public class Cliente {
 
     public Cliente(String Nome, String email, Long cpf, String sexo,String endereco,int numero,String complemento, String bairro, Long cep, String cidade, String uf, Long telefone, Long celular) {
         
-        Random random = new Random();
-        this.id = random.nextInt(1000) + 0;
         this.nome = Nome;
         this.email = email;
         this.cpf = cpf;

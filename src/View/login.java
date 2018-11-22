@@ -6,7 +6,7 @@
 package View;
 
 import Controller.UsuarioController;
-import com.sun.glass.events.KeyEvent;
+//import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -155,31 +155,10 @@ public class login extends javax.swing.JFrame {
 
     private void pwdFIeldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwdFIeldKeyPressed
 
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())) {
-                TelaPrincipal tela = new TelaPrincipal();
-                tela.setLocationRelativeTo(null);
-                tela.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
-            }
-
-        }
     }//GEN-LAST:event_pwdFIeldKeyPressed
 
     private void txtLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (UsuarioController.Logar(txtLogin.getText(), pwdFIeld.getText())) {
-                TelaPrincipal tela = new TelaPrincipal();
-                tela.setLocationRelativeTo(null);
-                tela.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos");
-            }
 
-        }
     }//GEN-LAST:event_txtLoginKeyPressed
 
     /**
