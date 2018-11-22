@@ -32,8 +32,18 @@ public class ClienteDAO {
             Class.forName("com.mysql.jdbc.Driver");
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
             conexao =  DriverManager.getConnection(url, "root", "1n0o9r7");
-            PreparedStatement comando = conexao.prepareStatement("INSERT INTO cliente(nome, CPF) values (?,?)");
-            comando.setString(0, p.getNome());
+            PreparedStatement comando = conexao.prepareStatement("INSERT INTO `lojainformatica`.`cliente`(`nome`,`email`,`cpf`,`date_entered`,`sexo`,`endereco`,`numero`,`complemento`,`bairro`,`cep`,`cidade`,`uf`,`telefone`,`celular`)\n" +
+"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            comando.setString(1, p.getNome());
+            comando.setString(2, p.getEmail());
+            comando.setString(3, p.getCpf().toString());
+            
+            comando.setString(4, "NOW()");
+            comando.setString(5, p.getSexo());
+            comando.setString(6, p.getEndereco());
+            comando.setInt(7, p.getNumero());
+            
+            
             int linhasAfetadas = comando.executeUpdate();
             
         } catch (ClassNotFoundException ex) {
