@@ -900,7 +900,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void LoadSearch(String busca) {
-
+        System.out.println("TESTE LOAD");
         ArrayList<String[]> linhasClientes = ClienteController.buscaCliente(busca);
 
         DefaultTableModel tmClientes = new DefaultTableModel();
