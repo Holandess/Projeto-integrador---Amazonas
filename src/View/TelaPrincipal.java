@@ -688,7 +688,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnSalvaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaProdutoActionPerformed
         if (ValidarFormulario()) {
             if (modoTela.equals("Criar")) {
-                Produto p = new Produto(Integer.parseInt("1"),
+                Produto p = new Produto(
                         cboCategoriaProduto.getSelectedItem().toString(),
                         txtNomeProduto.getText(),
                         txtDescProduto.getText(),

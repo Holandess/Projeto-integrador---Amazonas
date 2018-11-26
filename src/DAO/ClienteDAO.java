@@ -43,7 +43,7 @@ public class ClienteDAO {
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
             conexao = DriverManager.getConnection(url, bduser, bdpass);
             PreparedStatement comando = conexao.prepareStatement("INSERT INTO `lojainformatica`."
-                    + "`cliente`(`nome`,`email`,`cpf`,`date_entered`,`sexo`,"
+                    + "`clientes`(`nome`,`email`,`cpf`,`date_entered`,`sexo`,"
                     + "`endereco`,`numero`,`complemento`,`bairro`,`cep`,`cidade`,"
                     + "`uf`,`telefone`,`celular`)\n"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
@@ -81,9 +81,9 @@ public class ClienteDAO {
             Class.forName("com.mysql.jdbc.Driver");
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
             conexao = DriverManager.getConnection(url, bduser, bdpass);
-            PreparedStatement comando = conexao.prepareStatement("select * from cliente");
-            //comando.setString(1, busca);
-            //comando.setString(2, busca);
+            PreparedStatement comando = conexao.prepareStatement("select * from clientes WHERE nome LIKE ? OR cpf = ?");
+            comando.setString(1,"%" + busca + "%");
+            comando.setString(2, busca);
             ResultSet rs = comando.executeQuery();
             while (rs.next()) {
                 System.out.println("PASSEI VEZES");

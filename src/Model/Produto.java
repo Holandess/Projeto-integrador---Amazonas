@@ -11,9 +11,8 @@ public class Produto {
     private int qtdProduto;
     private float valorUnitario;
 
-    public Produto(int codProduto, String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
-        Random random = new Random();
-        this.codProduto = random.nextInt(1000) + 0;
+    public Produto(String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
+
         this.Categoria = Categoria;
         this.nomeProduto = nomeProduto;
         this.descProduto = descProduto;
