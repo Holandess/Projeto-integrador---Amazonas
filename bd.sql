@@ -16,17 +16,17 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cliente`
+-- Table structure for table `clientes`
 --
 
-DROP TABLE IF EXISTS `cliente`;
+DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cliente` (
+CREATE TABLE `clientes` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `cpf` int(11) DEFAULT NULL,
+  `cpf` varchar(11) DEFAULT NULL,
   `sexo` varchar(9) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `numero` int(5) DEFAULT NULL,
@@ -39,17 +39,46 @@ CREATE TABLE `cliente` (
   `celular` int(16) DEFAULT NULL,
   `date_entered` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cliente`
+-- Dumping data for table `clientes`
 --
 
-LOCK TABLES `cliente` WRITE;
-/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'teste','teste@teste.com.br',-1592937450,'Masculino','teste',123,'','teste',4433050,'Sao PAulo','SP',1239123,-466215869,'2018-11-22 00:00:00');
-/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,'teste','teste@teste.com.br','-1592937450','Masculino','teste',123,'','teste',4433050,'Sao PAulo','SP',1239123,-466215869,'2018-11-22 00:00:00'),(2,'Teste','teste@teste.com.br','45651702806','Masculino','oscar de barros',888,'1','JArdim itapura',4433050,'Sao PAUlo','SP',15231241,123123123,'2018-11-26 14:54:08');
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `produtos`
+--
+
+DROP TABLE IF EXISTS `produtos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `produtos` (
+  `codproduto` int(6) unsigned NOT NULL AUTO_INCREMENT,
+  `categoria` varchar(20) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `description` text,
+  `qtd` int(5) DEFAULT NULL,
+  `valor` float DEFAULT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  PRIMARY KEY (`codproduto`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `produtos`
+--
+
+LOCK TABLES `produtos` WRITE;
+/*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
+INSERT INTO `produtos` VALUES (3,'Notebook','Notebook Aceri','Notebook Acer muito',51,1234120,'2018-11-26 15:50:35'),(4,'Computador','Computador Marcos','Computador Marcos',142,41231,'2018-11-26 16:30:19');
+/*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -61,4 +90,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 18:01:27
+-- Dump completed on 2018-11-26 18:13:01

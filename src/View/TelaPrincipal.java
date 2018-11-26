@@ -700,7 +700,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ProdutoController.Salvar(p);
                 LimparFormularioCadProduto();
             } else {
-                
+                Produto p = new Produto(
+                        cboCategoriaProduto.getSelectedItem().toString(),
+                        txtNomeProduto.getText(),
+                        txtDescProduto.getText(),
+                        Integer.parseInt(this.txtQtdProduto.getText()),
+                        Float.parseFloat(txtVlrUnitarioProd.getText())
+                );
+                p.setcodProduto(Integer.parseInt(tblProdutosCadastrados.getValueAt(tblProdutosCadastrados.getSelectedRow(), 0).toString()));
+                JOptionPane.showMessageDialog(this, "Produto Atualizado com sucesso!!");
+                ProdutoController.Atualizar(p);
+                LimparFormularioCadProduto();
             }
 
         } else {
@@ -788,6 +798,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 txtDescProduto.setText(tblProdutosCadastrados.getModel().getValueAt(tblProdutosCadastrados.getSelectedRow(), 3).toString());
                 txtQtdProduto.setText(tblProdutosCadastrados.getModel().getValueAt(tblProdutosCadastrados.getSelectedRow(), 4).toString());
                 txtVlrUnitarioProd.setText(tblProdutosCadastrados.getModel().getValueAt(tblProdutosCadastrados.getSelectedRow(), 5).toString());
+                cboCategoriaProduto.setSelectedItem(tblProdutosCadastrados.getModel().getValueAt(tblProdutosCadastrados.getSelectedRow(), 1).toString());
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione um cliente para editar!");
             }

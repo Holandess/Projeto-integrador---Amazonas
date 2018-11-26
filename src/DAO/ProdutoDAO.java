@@ -42,7 +42,7 @@ public class ProdutoDAO {
                     + "`produtos`" + "("
                     + "`categoria`,"
                     + "`nome`,"
-                    + "`desc`,"
+                    + "`description`,"
                     + "`qtd`,"
                     + "`valor`,"
                     + "`date_entered`)"
@@ -72,6 +72,32 @@ public class ProdutoDAO {
         return true;
     }
 
+    public static boolean atualizar(Produto p) {
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
+            conexao = DriverManager.getConnection(url, bduser, bdpass);
+            PreparedStatement comando = conexao.prepareStatement("UPDATE produtos SET categoria = ?, nome = ?, description = ?, qtd = ?, valor = ? WHERE codproduto = ?");
+
+            comando.setString(1, p.getCategoria());
+            comando.setString(2, p.getNomeProduto());
+            comando.setString(3, p.getDescProduto());
+            comando.setInt(4, p.getQtdProduto());
+            comando.setFloat(5, p.getValorUnitario());
+            comando.setInt(6, p.getcodProduto());
+
+            int linhasAfetadas = comando.executeUpdate();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return true;
+    }
+
     public static ArrayList<Produto> buscaProdutos(String busca) {
         ArrayList<Produto> listaProdutos;
         listaProdutos = new ArrayList<Produto>();
@@ -87,7 +113,7 @@ public class ProdutoDAO {
             while (rs.next()) {
                 Produto p = new Produto(rs.getString("categoria"),
                         rs.getString("nome"),
-                        rs.getString("desc"),
+                        rs.getString("description"),
                         rs.getInt("qtd"),
                         rs.getFloat("valor")
                 );

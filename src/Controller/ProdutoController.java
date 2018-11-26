@@ -12,9 +12,8 @@ public class ProdutoController {
         return ProdutoDAO.Salvar(p);
     }
 
-    public static boolean Atualizar(int pId, String pNome, int pCPF) {
-        return true;
-
+    public static boolean Atualizar(Produto p) {
+        return ProdutoDAO.atualizar(p);
     }
 
     public static ArrayList<String[]> getProdutos(String busca) {
