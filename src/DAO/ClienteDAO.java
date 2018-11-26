@@ -29,6 +29,8 @@ public class ClienteDAO {
     private static String SERVIDOR = "localhost";
     private static String BASEDADOS = "lojainformatica";
     private static Connection conexao;
+    private static String bduser = "root";
+    private static String bdpass = "1n0o9r7";
 
     public static boolean Salvar(Cliente p) {
 
@@ -39,7 +41,7 @@ public class ClienteDAO {
             //return SimulaDB.getInstance().SalvarCliente(p);
             Class.forName("com.mysql.jdbc.Driver");
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
-            conexao = DriverManager.getConnection(url, "root", "1n0o9r7");
+            conexao = DriverManager.getConnection(url, bduser, bdpass);
             PreparedStatement comando = conexao.prepareStatement("INSERT INTO `lojainformatica`."
                     + "`cliente`(`nome`,`email`,`cpf`,`date_entered`,`sexo`,"
                     + "`endereco`,`numero`,`complemento`,`bairro`,`cep`,`cidade`,"
@@ -78,8 +80,8 @@ public class ClienteDAO {
             //return SimulaDB.getInstance().SalvarCliente(p);
             Class.forName("com.mysql.jdbc.Driver");
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
-            conexao = DriverManager.getConnection(url, "root", "1n0o9r7");
-            PreparedStatement comando = conexao.prepareStatement("SELECT * FROM cliente");
+            conexao = DriverManager.getConnection(url, bduser, bdpass);
+            PreparedStatement comando = conexao.prepareStatement("select * from cliente");
             //comando.setString(1, busca);
             //comando.setString(2, busca);
             ResultSet rs = comando.executeQuery();
@@ -98,8 +100,9 @@ public class ClienteDAO {
                         rs.getString("uf"),
                         Long.parseLong(rs.getString("telefone")),
                         Long.parseLong(rs.getString("celular")));
+                c.setId(rs.getInt("id"));
                 listaClientes.add(c);
-                return listaClientes;
+                
             }
 
         } catch (ClassNotFoundException ex) {
@@ -111,8 +114,5 @@ public class ClienteDAO {
         return listaClientes;
     }
 
-    public static ArrayList<Cliente> getClientes() {
-        return SimulaDB.getInstance().getClientes();
-    }
 
 }

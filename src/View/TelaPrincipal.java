@@ -939,22 +939,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void LoadTable() {
-
-        ArrayList<String[]> linhasClientes = ClienteController.getClientes();
-
-        DefaultTableModel tmClientes = new DefaultTableModel();
-        tmClientes.addColumn("Nome Completo");
-        tmClientes.addColumn("CPF");
-        tmClientes.addColumn("E-Mail");
-
-        for (String[] c : linhasClientes) {
-            tmClientes.addRow(c);
-        }
-
-        tblClientes.setModel(tmClientes);
-    }
-
     public void LoadTableProdutos() {
 
         ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos(txtBuscaProduto.getText());

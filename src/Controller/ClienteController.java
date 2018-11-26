@@ -19,19 +19,6 @@ public class ClienteController {
         return ClienteDAO.Salvar(c);
     }
 
-    public static ArrayList<String[]> getClientes() {
-        ArrayList<Cliente> clientes = ClienteDAO.getClientes();
-        ArrayList<String[]> listaClientes = new ArrayList<>();
-
-        for (int i = 0; i < clientes.size(); i++) {
-            listaClientes.add(new String[]{String.valueOf(clientes.get(i).getNome()), clientes.get(i).getCpf().toString(), String.valueOf(clientes.get(i).getEmail())});
-
-        }
-
-        return listaClientes;
-
-    }
-
     public static ArrayList<String[]> buscaCliente(String busca) {
         ArrayList<Cliente> clientes = ClienteDAO.buscaClientes(busca);
         ArrayList<String[]> listaClientes = new ArrayList<>();
