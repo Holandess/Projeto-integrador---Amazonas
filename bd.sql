@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: lojainformatica
+-- Host: localhost    Database: lojainformatica
 -- ------------------------------------------------------
 -- Server version	5.7.24-0ubuntu0.16.04.1
 
@@ -77,8 +77,35 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (3,'Notebook','Notebook Aceri','Notebook Acer muito',51,1234120,'2018-11-26 15:50:35'),(4,'Computador','Computador Marcos','Computador Marcos',142,41231,'2018-11-26 16:30:19');
+INSERT INTO `produtos` VALUES (3,'Notebook','Notebook Acer','Notebook Acer muito',51,12341,'2018-11-26 15:50:35');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vendas`
+--
+
+DROP TABLE IF EXISTS `vendas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vendas` (
+  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+  `valor` float NOT NULL,
+  `meiodepagamento` varchar(20) NOT NULL,
+  `idcliente` int(6) unsigned NOT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vendas`
+--
+
+LOCK TABLES `vendas` WRITE;
+/*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
+INSERT INTO `vendas` VALUES (5,148092,'Dinheiro',1,'2018-11-28 01:27:59');
+/*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -90,4 +117,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-26 18:13:01
+-- Dump completed on 2018-11-28  1:30:38

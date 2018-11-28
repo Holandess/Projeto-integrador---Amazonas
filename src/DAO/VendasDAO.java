@@ -45,10 +45,10 @@ public class VendasDAO {
                     + "`date_entered`)"
                     + "VALUES"
                     + "("
-                    + "?"
                     + "?,"
                     + "?,"
-                    + "?>);");
+                    + "?,"
+                    + "?);");
 
             comando.setDouble(1, v.getValorVenda());
             comando.setString(2, v.getMeioDePagamento());
