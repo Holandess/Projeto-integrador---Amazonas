@@ -10,9 +10,7 @@ public class Venda {
     private int idCliente;
 
     public Venda(double valorVenda, String meioDePagamento, int idCliente) {
-
-        Random random = new Random();
-        this.idVenda = random.nextInt(1000) + 0;
+        
         this.valorVenda = valorVenda;
         this.meioDePagamento = meioDePagamento;
         this.idCliente = idCliente;
@@ -43,11 +41,11 @@ public class Venda {
         this.meioDePagamento = meioDePagamento;
     }
 
-    public int getNomeCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setNomeCliente(int idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 

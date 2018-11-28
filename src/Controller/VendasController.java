@@ -13,8 +13,10 @@ import Model.Venda;
  * @author guilherme.gmonteiro3
  */
 public class VendasController {
+    
+    
 
-    public static boolean Salvar(Venda v) {
+    public static int Salvar(Venda v) {
 
         return VendasDAO.Salvar(v);
     }

@@ -7,6 +7,7 @@ package View;
 
 import Controller.ClienteController;
 import Controller.ProdutoController;
+import Controller.VendasController;
 import Model.Pedido;
 import Model.Produto;
 import Model.Venda;
@@ -787,7 +788,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 String formaPagamento = cboFormadepagamento.getSelectedItem().toString();
 
                 Venda v = new Venda(Double.parseDouble(lblValor.getText()), formaPagamento, idCliente);
-
+                int idVenda = VendasController.Salvar(v);
+                
                 for (int i = 0; i < listaCarrinho.size(); i++) {
                     Pedido p = new Pedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]));
                 }
