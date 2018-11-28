@@ -5,11 +5,10 @@
  */
 package DAO;
 
-import Model.Venda;
+import Model.ItemPedido;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
@@ -19,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author guilherme.gmonteiro3
  */
-public class VendasDAO {
+public class ItemPedidoDAO {
 
     private static String url = "";
     private static String SERVIDOR = "localhost";
@@ -28,46 +27,37 @@ public class VendasDAO {
     private static String bduser = "root";
     private static String bdpass = "1n0o9r7";
 
-    public static int Salvar(Venda v) {
-
+    public static boolean Salvar(ItemPedido p) {
         try {
             java.util.Date date = new Date();
             Object param = new java.sql.Timestamp(date.getTime());
-            
+
             //return SimulaDB.getInstance().SalvarCliente(p);
             Class.forName("com.mysql.jdbc.Driver");
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
             conexao = DriverManager.getConnection(url, bduser, bdpass);
-            PreparedStatement comando = conexao.prepareStatement("INSERT INTO `lojainformatica`.`vendas`"
+            PreparedStatement comando = conexao.prepareStatement("INSERT INTO `lojainformatica`.`item_pedido`"
                     + "("
+                    + "`idvenda`,"
+                    + "`idproduto`,"
+                    + "`qtd`,"
                     + "`valor`,"
-                    + "`meiodepagamento`,"
-                    + "`idcliente`,"
                     + "`date_entered`)"
                     + "VALUES"
                     + "("
                     + "?,"
                     + "?,"
                     + "?,"
+                    + "?,"
                     + "?);");
 
-            comando.setDouble(1, v.getValorVenda());
-            comando.setString(2, v.getMeioDePagamento());
-            comando.setInt(3, v.getIdCliente());
-            comando.setObject(4, param);
+            comando.setInt(1, p.getIdVenda());
+            comando.setInt(2, p.getIdProduto());
+            comando.setInt(3, p.getQtd());
+            comando.setFloat(4, p.getValor());
+            comando.setObject(5, param);
 
             int linhasAfetadas = comando.executeUpdate();
-            
-            PreparedStatement selectid = conexao.prepareStatement("SELECT LAST_INSERT_ID() as id");
-            ResultSet rs = selectid.executeQuery();
-            while (rs.next()) {
-                
-                v.setIdVenda(rs.getInt("id"));
-                return v.getIdVenda();
-
-            }
-            
-            
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,8 +65,7 @@ public class VendasDAO {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return v.getIdVenda();
-
+        return true;
     }
 
 }

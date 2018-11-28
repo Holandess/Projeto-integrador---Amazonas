@@ -11,20 +11,40 @@ import java.util.Random;
  *
  * @author enzo.samorim
  */
-public class Pedido {
+public class ItemPedido {
 
     private int id;
     private int idVenda;
     private int idProduto;
+    private int qtd;
+    private float valor;
 
-    public Pedido(int idVenda, int idProduto) {
 
-        Random random = new Random();
-        this.id = random.nextInt(1000) + 0;
+    public ItemPedido(int idVenda, int idProduto, int qtd, float valor) {
+        
         this.idVenda = idVenda;
         this.idProduto = idProduto;
+        this.qtd = qtd;
+        this.valor = valor;
 
 
+    }
+    
+    
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
     }
 
     public int getId() {

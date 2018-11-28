@@ -19,7 +19,7 @@ public class SimulaDB {
     private ArrayList<Cliente> listaClientes; //Simulo a tabela clientes
     private ArrayList<Produto> listaProdutos; //Simulo a tabela Produtos
     private ArrayList<Usuario> listaUsuarios; //Simulo a tabela Usuarios
-    private ArrayList<Pedido> listaPedidos; //Simulo a tabela Pedidos
+    private ArrayList<ItemPedido> listaPedidos; //Simulo a tabela Pedidos
     private ArrayList<Venda> listaVenda; //Simulo a tabela Vendas
 
     private SimulaDB() {
@@ -27,7 +27,7 @@ public class SimulaDB {
         listaClientes = new ArrayList<Cliente>();
         listaProdutos = new ArrayList<Produto>();
         listaUsuarios = new ArrayList<Usuario>();
-        listaPedidos = new ArrayList<Pedido>();
+        listaPedidos = new ArrayList<ItemPedido>();
         listaVenda = new ArrayList<Venda>();
 
         Usuario user = new Usuario("Vendedor", "1234", "Vendedor Guilherme", "guilhermevendas@teste.com.br");
@@ -118,13 +118,13 @@ public class SimulaDB {
 
     }
 
-    public boolean SalvarPedido(Pedido p) { //Enzo
+    public boolean SalvarPedido(ItemPedido p) { //Enzo
         listaPedidos.add(p);
 
         return true;
     }
 
-    public ArrayList<Pedido> getPedidos() { //Enzo
+    public ArrayList<ItemPedido> getPedidos() { //Enzo
         return this.listaPedidos;
     }
 

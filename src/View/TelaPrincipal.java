@@ -6,9 +6,10 @@
 package View;
 
 import Controller.ClienteController;
+import Controller.ItemPedidoController;
 import Controller.ProdutoController;
 import Controller.VendasController;
-import Model.Pedido;
+import Model.ItemPedido;
 import Model.Produto;
 import Model.Venda;
 import java.awt.Color;
@@ -791,7 +792,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 int idVenda = VendasController.Salvar(v);
                 
                 for (int i = 0; i < listaCarrinho.size(); i++) {
-                    Pedido p = new Pedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]));
+                    ItemPedido p = new ItemPedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]), Integer.parseInt(listaCarrinho.get(i)[2]), Float.parseFloat(listaCarrinho.get(i)[3]));
+                    ItemPedidoController.Salvar(p);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Voce deve selecionar ao menos um produto");
