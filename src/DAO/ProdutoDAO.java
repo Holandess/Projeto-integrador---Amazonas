@@ -97,6 +97,27 @@ public class ProdutoDAO {
 
         return true;
     }
+    
+        public static boolean Excluir(String id) {
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
+            conexao = DriverManager.getConnection(url, bduser, bdpass);
+            PreparedStatement comando = conexao.prepareStatement("DELETE FROM produtos WHERE codproduto = ?");
+
+            comando.setString(1, id);
+
+            int linhasAfetadas = comando.executeUpdate();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return true;
+    }
 
     public static ArrayList<Produto> buscaProdutos(String busca) {
         ArrayList<Produto> listaProdutos;

@@ -500,6 +500,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnExcluiProduto.setText("Excluir");
         btnExcluiProduto.setMaximumSize(new java.awt.Dimension(81, 25));
         btnExcluiProduto.setMinimumSize(new java.awt.Dimension(81, 25));
+        btnExcluiProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluiProdutoActionPerformed(evt);
+            }
+        });
 
         botaoOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/research.png"))); // NOI18N
         botaoOk.setText("Buscar");
@@ -711,6 +716,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Produto Atualizado com sucesso!!");
                 ProdutoController.Atualizar(p);
                 LimparFormularioCadProduto();
+                this.LoadSearchProduct(txtPesquisaProduto.getText(), "cadastroProduto");
+
             }
 
         } else {
@@ -773,16 +780,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnFinalizaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizaPagamentoActionPerformed
         // TODO add your handling code here:
-        int idCliente = Integer.parseInt(tblClientes.getValueAt(tblClientes.getSelectedRow(), 0).toString());
-        String formaPagamento = cboFormadepagamento.getSelectedItem().toString();
+        int idCliente = 0;
+        if (tblClientes.getSelectedRow() >= 0) {
+            idCliente = Integer.parseInt(tblClientes.getValueAt(tblClientes.getSelectedRow(), 0).toString());
+            if (listaCarrinho.size() > 0) {
+                String formaPagamento = cboFormadepagamento.getSelectedItem().toString();
 
-        Venda v = new Venda(Double.parseDouble(lblValor.getText()), formaPagamento, idCliente);
+                Venda v = new Venda(Double.parseDouble(lblValor.getText()), formaPagamento, idCliente);
 
-        for (int i = 0; i < listaCarrinho.size(); i++) {
-            Pedido p = new Pedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]));
+                for (int i = 0; i < listaCarrinho.size(); i++) {
+                    Pedido p = new Pedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]));
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Voce deve selecionar ao menos um produto");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para a venda ser finalizada");
+
         }
-
-        JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso !");
 
 
     }//GEN-LAST:event_btnFinalizaPagamentoActionPerformed
@@ -807,6 +822,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnEditaProdutoActionPerformed
+
+    private void btnExcluiProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluiProdutoActionPerformed
+        // TODO add your handling code here:
+        if (ProdutoController.Excluir(tblProdutosCadastrados.getModel().getValueAt(tblProdutosCadastrados.getSelectedRow(), 0).toString())) {
+            this.LoadSearchProduct(txtPesquisaProduto.getText(), "cadastroProduto");
+        }
+
+
+    }//GEN-LAST:event_btnExcluiProdutoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -16,6 +16,11 @@ public class ProdutoController {
         return ProdutoDAO.atualizar(p);
     }
 
+    public static boolean Excluir(String id) {
+        //FProduto p = new Produto();
+        return ProdutoDAO.Excluir(id);
+    }
+
     public static ArrayList<String[]> getProdutos(String busca) {
         ArrayList<Produto> produtos = ProdutoDAO.buscaProdutos(busca);
         ArrayList<String[]> listaProdutos = new ArrayList<>();
@@ -35,10 +40,9 @@ public class ProdutoController {
 
         Produto p = new Produto();
         for (int i = 0; i < produtos.size(); i++) {
-            
-                p = produtos.get(i);
 
-            
+            p = produtos.get(i);
+
         }
         return p;
 
