@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
-
-import Model.Pedido;
-
+package Controller;
+import DAO.ItemPedidoDAO;
+import Model.ItemPedido;
 /**
  *
  * @author guilherme.gmonteiro3
  */
-public class PedidoDAO {
-
-    public static boolean Salvar(Pedido p) {
-        return SimulaDB.getInstance().SalvarPedido(p);
+public class ItemPedidoController {
+    
+     public static boolean Salvar(ItemPedido p) {
+        
+        return ItemPedidoDAO.Salvar(p);
     }
-
+    
 }
