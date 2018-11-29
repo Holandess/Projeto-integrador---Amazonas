@@ -790,11 +790,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
                 Venda v = new Venda(Double.parseDouble(lblValor.getText()), formaPagamento, idCliente);
                 int idVenda = VendasController.Salvar(v);
-                
+
                 for (int i = 0; i < listaCarrinho.size(); i++) {
                     ItemPedido p = new ItemPedido(v.getIdVenda(), Integer.parseInt(listaCarrinho.get(i)[0]), Integer.parseInt(listaCarrinho.get(i)[2]), Float.parseFloat(listaCarrinho.get(i)[3]));
                     ItemPedidoController.Salvar(p);
                 }
+                JOptionPane.showMessageDialog(null, "Venda Finalizada com Sucesso!!");
+                limparVenda();
             } else {
                 JOptionPane.showMessageDialog(null, "Voce deve selecionar ao menos um produto");
             }
@@ -907,6 +909,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }
 
+    public void limparVenda() {
+        this.listaCarrinho.clear();
+        LoadCarrinhoRemove();
+        LoadSearch("");
+        txtBuscaProduto.setText("");
+        txtQuantidadeCarrinho1.setText("");
+        txtDescricaoProduto.setText("");
+        lblNomeProduto.setText("Nome do Produto");
+    }
+
     public void LimparFormulario() {
         txtNomeProduto.setText("");
         txtDescProduto.setText("");
@@ -939,7 +951,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void LoadSearch(String busca) {
-        System.out.println("TESTE LOAD");
+        
         ArrayList<String[]> linhasClientes = ClienteController.buscaCliente(busca);
 
         DefaultTableModel tmClientes = new DefaultTableModel();
