@@ -53,6 +53,34 @@ INSERT INTO `clientes` VALUES (1,'teste','teste@teste.com.br','-1592937450','Mas
 UNLOCK TABLES;
 
 --
+-- Table structure for table `item_pedido`
+--
+
+DROP TABLE IF EXISTS `item_pedido`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item_pedido` (
+  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+  `idvenda` int(6) unsigned NOT NULL,
+  `idproduto` int(6) unsigned NOT NULL,
+  `qtd` int(3) unsigned NOT NULL,
+  `valor` float unsigned NOT NULL,
+  `date_entered` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_pedido`
+--
+
+LOCK TABLES `item_pedido` WRITE;
+/*!40000 ALTER TABLE `item_pedido` DISABLE KEYS */;
+INSERT INTO `item_pedido` VALUES (6,6,3,20,246820,'2018-11-28 21:54:44'),(7,7,3,20,246820,'2018-11-28 21:55:41'),(8,7,3,20,246820,'2018-11-28 21:55:41'),(9,8,3,12,148092,'2018-11-28 22:00:36'),(10,8,3,12,148092,'2018-11-28 22:00:36'),(11,9,3,1,12341,'2018-11-28 22:02:13'),(12,10,3,12,148092,'2018-11-28 22:03:35'),(13,11,3,12,148092,'2018-11-28 22:03:48'),(14,12,3,12,148092,'2018-11-28 22:16:06'),(15,13,3,12,148092,'2018-11-28 22:16:35'),(16,14,3,12,148092,'2018-11-28 22:16:51'),(17,15,3,12,148092,'2018-11-28 22:17:16'),(18,16,3,12,148092,'2018-11-28 22:17:49'),(19,17,3,12,148092,'2018-11-28 22:19:56');
+/*!40000 ALTER TABLE `item_pedido` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `produtos`
 --
 
@@ -68,7 +96,7 @@ CREATE TABLE `produtos` (
   `valor` float DEFAULT NULL,
   `date_entered` datetime DEFAULT NULL,
   PRIMARY KEY (`codproduto`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +123,7 @@ CREATE TABLE `vendas` (
   `idcliente` int(6) unsigned NOT NULL,
   `date_entered` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +132,7 @@ CREATE TABLE `vendas` (
 
 LOCK TABLES `vendas` WRITE;
 /*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
-INSERT INTO `vendas` VALUES (5,148092,'Dinheiro',1,'2018-11-28 01:27:59');
+INSERT INTO `vendas` VALUES (5,148092,'Dinheiro',1,'2018-11-28 01:27:59'),(6,246820,'Cartão de Crédito',1,'2018-11-28 21:54:44'),(7,493640,'Cartão de Crédito',1,'2018-11-28 21:55:41'),(8,296184,'Dinheiro',1,'2018-11-28 22:00:36'),(9,12341,'Dinheiro',2,'2018-11-28 22:02:13'),(10,148092,'Dinheiro',1,'2018-11-28 22:03:35'),(11,148092,'Dinheiro',2,'2018-11-28 22:03:48'),(12,148092,'Dinheiro',1,'2018-11-28 22:16:06'),(13,148092,'Dinheiro',1,'2018-11-28 22:16:35'),(14,148092,'Dinheiro',1,'2018-11-28 22:16:51'),(15,148092,'Dinheiro',2,'2018-11-28 22:17:16'),(16,148092,'Dinheiro',2,'2018-11-28 22:17:49'),(17,148092,'Dinheiro',2,'2018-11-28 22:19:56');
 /*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -117,4 +145,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28  1:30:38
+-- Dump completed on 2018-11-28 22:24:53
