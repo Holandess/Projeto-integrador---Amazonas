@@ -18,6 +18,15 @@ public class ClienteController {
     public static boolean Salvar(Cliente c) {
         return ClienteDAO.Salvar(c);
     }
+    
+    public static boolean Excluir(String id) {
+        //FProduto p = new Produto();
+        return ClienteDAO.Excluir(id);
+    }
+    
+    public static boolean Atualizar(Cliente p) {
+        return ClienteDAO.atualizar(p);
+    }
 
     public static ArrayList<String[]> buscaCliente(String busca) {
         ArrayList<Cliente> clientes = ClienteDAO.buscaClientes(busca);
