@@ -80,7 +80,7 @@ public class ClienteDAO {
             Class.forName("com.mysql.jdbc.Driver");
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
             conexao = DriverManager.getConnection(url, bduser, bdpass);
-            //Object param = new java.sql.Timestamp(date.getTime());
+           //Object param = new java.sql.Timestamp(date.getTime());
             PreparedStatement comando = conexao.prepareStatement("UPDATE clientes SET `nome`,`email`,`cpf`,`date_entered`,`sexo`,"
                     + "`endereco`,`numero`,`complemento`,`bairro`,`cep`,`cidade`,"
                     + "`uf`,`telefone`,`celular`) WHERE id = ?");
@@ -90,7 +90,7 @@ public class ClienteDAO {
             comando.setString(1, p.getNome());
             comando.setString(2, p.getEmail());
             comando.setString(3, p.getCpf().toString());
-            // comando.setObject(4, param);
+           // comando.setObject(4, param);
             comando.setString(5, p.getSexo());
             comando.setString(6, p.getEndereco());
             comando.setInt(7, p.getNumero());

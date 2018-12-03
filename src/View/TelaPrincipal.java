@@ -1165,7 +1165,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         // TODO add your handling code here:
-        if (validarFormulario()) {
+
+        if (validarFormularioGC()) {
+            
+            if(modoTela.equals("Criar")){
             Cliente c = new Cliente(txtNomeGC.getText(),
                     txtEmailGC.getText(),
                     Long.parseLong(this.txtCPFgc.getText()),
@@ -1180,13 +1183,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     Long.parseLong(this.txtTelefoneGC.getText()),
                     Long.parseLong(this.txtCelularGC.getText())
             );
-
+            
             ClienteController.Salvar(c);
             JOptionPane.showMessageDialog(this, "Cliente Criado com Sucesso!!");
-
+            }
+            else{
+                Cliente c = new Cliente(txtNomeGC.getText(),
+                    txtEmailGC.getText(),
+                    Long.parseLong(this.txtCPFgc.getText()),
+                    cboSexoGC.getSelectedItem().toString(),
+                    txtEnderecoGC.getText(),
+                    Integer.parseInt(this.txtNumeroGC.getText()),
+                    txtCompGC.getText(),
+                    txtBairroGC.getText(),
+                    Long.parseLong(this.txtCEPgc.getText()),
+                    txtCidadeGC.getText(),
+                    cboUFgc.getSelectedItem().toString(),
+                    Long.parseLong(this.txtTelefoneGC.getText()),
+                    Long.parseLong(this.txtCelularGC.getText())
+            );
+                c.setId(Integer.parseInt(tblClienteCadastradoGC.getValueAt(tblClienteCadastradoGC.getSelectedRow(), 0).toString()));
+                JOptionPane.showMessageDialog(this, "Cliente Atualizado com sucesso!!");
+                ClienteController.Atualizar(c);
+                //LimparFormularioCadProduto();
+                this.LoadSearchGC(txtBuscaClienteGC.getText());
+                    
+                    
+                    
+                    
+                    }
+            
+            
         } else {
             JOptionPane.showMessageDialog(this, "Preencher os campos destacados corretamente");
         }
+
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1221,8 +1252,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 txtCEPgc.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 11).toString());
                 cboUFgc.setSelectedItem(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 12).toString());
                 txtCelularGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 13).toString());
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione um cliente para editar!");
             }
@@ -1233,9 +1263,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
         if (ClienteController.Excluir(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 0).toString())) {
-            
+
             this.LoadSearchGC(txtBuscaClienteGC.getText());
-        
+
         }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
@@ -1274,7 +1304,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    private boolean validarFormulario() {
+    private boolean validarFormularioGC() {
         //VALIDAÇÃO DE CAMPOS
         boolean pass = true;
 
