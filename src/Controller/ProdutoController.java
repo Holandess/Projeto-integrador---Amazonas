@@ -33,6 +33,18 @@ public class ProdutoController {
         return listaProdutos;
     }
 
+    public static ArrayList<String[]> getReports(String from, String to) {
+        ArrayList<Produto> produtos = ProdutoDAO.getReports(from, to);
+        ArrayList<String[]> listaProdutos = new ArrayList<>();
+
+        for (int i = 0; i < produtos.size(); i++) {
+
+            listaProdutos.add(new String[]{produtos.get(i).getNomeProduto(), produtos.get(i).getCategoria(), String.valueOf(produtos.get(i).getQtdProduto()), String.valueOf(produtos.get(i).getValorUnitario())});
+
+        }
+        return listaProdutos;
+    }
+
     public static Produto getProdutoById(String idProduto) {
         //FProduto p = new Produto();
 

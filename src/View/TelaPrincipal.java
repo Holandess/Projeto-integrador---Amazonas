@@ -724,6 +724,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel26.setText("Ate");
 
         btnReportGenerate.setText("Gerar Relatorio");
+        btnReportGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportGenerateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1339,6 +1344,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFromActionPerformed
 
+    private void btnReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportGenerateActionPerformed
+        // TODO add your handling code here:
+        this.LoadReport(txtFrom.getText(), txtTo.getText());
+    }//GEN-LAST:event_btnReportGenerateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1607,6 +1617,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } else if (context.equals("cadastroProduto")) {
             tblProdutosCadastrados.setModel(tmProdutos);
         }
+    }
+    
+        public void LoadReport(String from, String to) {
+
+        ArrayList<String[]> linhasProdutos = ProdutoController.getReports(from, to);
+
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("Produto");
+        tmProdutos.addColumn("Categoria");
+        tmProdutos.addColumn("Quantidade");
+        tmProdutos.addColumn("Valor Total");
+
+        for (String[] c : linhasProdutos) {
+            tmProdutos.addRow(c);
+        }
+        
+            tblResultados.setModel(tmProdutos);
+
     }
 
     public void LoadTableProdutos() {
