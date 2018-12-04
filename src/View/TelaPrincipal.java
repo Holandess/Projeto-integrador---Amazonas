@@ -197,7 +197,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tblProdutosCadastrados = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblResultados = new javax.swing.JTable();
+        txtFrom = new javax.swing.JTextField();
+        txtTo = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        btnReportGenerate = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -715,34 +720,69 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Estoque de Produtos", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/package.png")), jPanel1); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Produto", "Categoria", "Quantidade", "Valor Total"
             }
         ));
-        jScrollPane7.setViewportView(jTable1);
+        jScrollPane7.setViewportView(tblResultados);
+
+        txtFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFromActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setText("De");
+
+        jLabel26.setText("Ate");
+
+        btnReportGenerate.setText("Gerar Relatorio");
+        btnReportGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportGenerateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                        .addComponent(txtTo))
+                    .addComponent(btnReportGenerate))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(858, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnReportGenerate))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(861, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Relatorios", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/profits.png")), jPanel10); // NOI18N
@@ -1317,6 +1357,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.modoTela = "CriarCliente";
     }//GEN-LAST:event_btnNovoClienteActionPerformed
 
+    private void txtFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFromActionPerformed
+
+    private void btnReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportGenerateActionPerformed
+        // TODO add your handling code here:
+        this.LoadReport(txtFrom.getText(), txtTo.getText());
+    }//GEN-LAST:event_btnReportGenerateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1631,6 +1680,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tblProdutosCadastrados.setModel(tmProdutos);
         }
     }
+    
+        public void LoadReport(String from, String to) {
+
+        ArrayList<String[]> linhasProdutos = ProdutoController.getReports(from, to);
+
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("Produto");
+        tmProdutos.addColumn("Categoria");
+        tmProdutos.addColumn("Quantidade");
+        tmProdutos.addColumn("Valor Total");
+
+        for (String[] c : linhasProdutos) {
+            tmProdutos.addRow(c);
+        }
+        
+            tblResultados.setModel(tmProdutos);
+
+    }
 
     public void LoadTableProdutos() {
 
@@ -1666,6 +1733,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnNovoCliente;
     private javax.swing.JButton btnNovoProduto;
     private javax.swing.JButton btnRemoveCarrinho;
+    private javax.swing.JButton btnReportGenerate;
     private javax.swing.JButton btnSalvaProduto;
     private javax.swing.JButton btnSalvarCliente;
     private javax.swing.JComboBox<String> cboCategoriaProduto;
@@ -1689,6 +1757,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1715,7 +1785,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblValor;
     private javax.swing.JTable tblCarrinho;
@@ -1723,6 +1792,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTable tblProdutosCadastrados;
+    private javax.swing.JTable tblResultados;
     private javax.swing.JTextField txtBairroGC;
     private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JTextField txtBuscaClienteGC;
@@ -1736,6 +1806,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea txtDescricaoProduto;
     private javax.swing.JTextField txtEmailGC;
     private javax.swing.JTextField txtEnderecoGC;
+    private javax.swing.JTextField txtFrom;
     private javax.swing.JTextField txtNomeGC;
     private javax.swing.JFormattedTextField txtNomeProduto;
     private javax.swing.JFormattedTextField txtNumeroGC;
@@ -1743,6 +1814,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtQtdProduto;
     private javax.swing.JTextField txtQuantidadeCarrinho1;
     private javax.swing.JFormattedTextField txtTelefoneGC;
+    private javax.swing.JTextField txtTo;
     private javax.swing.JFormattedTextField txtVlrUnitarioProd;
     // End of variables declaration//GEN-END:variables
 }
