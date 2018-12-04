@@ -48,10 +48,10 @@ public class ClienteDAO {
                     + "`endereco`,`numero`,`complemento`,`bairro`,`cep`,`cidade`,"
                     + "`uf`,`telefone`,`celular`)\n"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-           comando.setString(1, p.getNome());
+            comando.setString(1, p.getNome());
             comando.setString(2, p.getEmail());
             comando.setLong(3, p.getCpf().intValue());
-            comando.setObject(4,param);
+            comando.setObject(4, param);
             comando.setString(5, p.getSexo());
             comando.setString(6, p.getEndereco());
             comando.setInt(7, p.getNumero());
@@ -80,18 +80,16 @@ public class ClienteDAO {
             Class.forName("com.mysql.jdbc.Driver");
             url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
             conexao = DriverManager.getConnection(url, bduser, bdpass);
-           //Object param = new java.sql.Timestamp(date.getTime());
+            //Object param = new java.sql.Timestamp(date.getTime());
             PreparedStatement comando = conexao.prepareStatement("UPDATE clientes SET nome = ?,"
                     + " email = ?, cpf = ?, date_entered = ? , sexo = ?,"
                     + " endereco = ?, numero = ?,complemento = ?, bairro = ?, cep = ?,cidade = ?,"
                     + " uf = ?, telefone = ?, celular = ? WHERE id = ?");
-            
-            
-            
+
             comando.setString(1, p.getNome());
             comando.setString(2, p.getEmail());
             comando.setString(3, p.getCpf().toString());
-           // comando.setObject(4, param);
+            // comando.setObject(4, param);
             comando.setString(5, p.getSexo());
             comando.setString(6, p.getEndereco());
             comando.setInt(7, p.getNumero());
@@ -103,7 +101,7 @@ public class ClienteDAO {
             comando.setInt(13, Integer.valueOf(p.getTelefone().intValue()));
             comando.setInt(14, Integer.valueOf(p.getCelular().intValue()));
             comando.setInt(15, p.getId());
-            
+
             int linhasAfetadas = comando.executeUpdate();
 
         } catch (ClassNotFoundException ex) {
@@ -126,6 +124,7 @@ public class ClienteDAO {
             PreparedStatement comando = conexao.prepareStatement("select * from clientes WHERE nome LIKE ? OR cpf = ?");
             comando.setString(1, "%" + busca + "%");
             comando.setString(2, busca);
+
             ResultSet rs = comando.executeQuery();
             while (rs.next()) {
                 System.out.println("PASSEI VEZES");
