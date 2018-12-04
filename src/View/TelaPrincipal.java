@@ -179,6 +179,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProdutosCadastrados = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -696,15 +698,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Estoque de Produtos", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/package.png")), jPanel1); // NOI18N
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1422, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 964, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(858, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Relatorios", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/profits.png")), jPanel10); // NOI18N
@@ -768,6 +789,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnNovoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/plus-16.png"))); // NOI18N
         btnNovoCliente.setText("Novo");
         btnNovoCliente.setPreferredSize(new java.awt.Dimension(62, 23));
+        btnNovoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoClienteActionPerformed(evt);
+            }
+        });
 
         btnEditarClienteGC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/edit-16.png"))); // NOI18N
         btnEditarClienteGC.setText("Editar");
@@ -1165,7 +1191,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         // TODO add your handling code here:
-        if (validarFormulario()) {
+
+        if (validarFormularioGC()) {
+            
+            if(modoTela.equals("CriarCliente")){
             Cliente c = new Cliente(txtNomeGC.getText(),
                     txtEmailGC.getText(),
                     Long.parseLong(this.txtCPFgc.getText()),
@@ -1180,13 +1209,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     Long.parseLong(this.txtTelefoneGC.getText()),
                     Long.parseLong(this.txtCelularGC.getText())
             );
-
+            
             ClienteController.Salvar(c);
             JOptionPane.showMessageDialog(this, "Cliente Criado com Sucesso!!");
-
+            }
+            else{
+                Cliente c = new Cliente(txtNomeGC.getText(),
+                    txtEmailGC.getText(),
+                    Long.parseLong(this.txtCPFgc.getText()),
+                    cboSexoGC.getSelectedItem().toString(),
+                    txtEnderecoGC.getText(),
+                    Integer.parseInt(this.txtNumeroGC.getText()),
+                    txtCompGC.getText(),
+                    txtBairroGC.getText(),
+                    Long.parseLong(this.txtCEPgc.getText()),
+                    txtCidadeGC.getText(),
+                    cboUFgc.getSelectedItem().toString(),
+                    Long.parseLong(this.txtTelefoneGC.getText()),
+                    Long.parseLong(this.txtCelularGC.getText())
+            );
+                c.setId(Integer.parseInt(tblClienteCadastradoGC.getValueAt(tblClienteCadastradoGC.getSelectedRow(), 0).toString()));
+                JOptionPane.showMessageDialog(this, "Cliente Atualizado com sucesso!!");
+                ClienteController.Atualizar(c);
+                //LimparFormularioCadProduto();
+                this.LoadSearchGC(txtBuscaClienteGC.getText());
+                    
+                    
+                    
+                    
+                    }
+            
+            
         } else {
             JOptionPane.showMessageDialog(this, "Preencher os campos destacados corretamente");
         }
+
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1221,8 +1278,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 txtCEPgc.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 11).toString());
                 cboUFgc.setSelectedItem(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 12).toString());
                 txtCelularGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 13).toString());
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione um cliente para editar!");
             }
@@ -1233,11 +1289,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
         if (ClienteController.Excluir(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 0).toString())) {
-            
+
             this.LoadSearchGC(txtBuscaClienteGC.getText());
-        
+
         }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
+
+    private void btnNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoClienteActionPerformed
+        // TODO add your handling code here:
+        this.modoTela = "CriarCliente";
+    }//GEN-LAST:event_btnNovoClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1274,7 +1335,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    private boolean validarFormulario() {
+    private boolean validarFormularioGC() {
         //VALIDAÇÃO DE CAMPOS
         boolean pass = true;
 
@@ -1590,7 +1651,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblValor;
     private javax.swing.JTable tblCarrinho;
