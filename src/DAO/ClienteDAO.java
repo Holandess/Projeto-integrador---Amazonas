@@ -31,7 +31,7 @@ public class ClienteDAO {
     private static String BASEDADOS = "lojainformatica";
     private static Connection conexao;
     private static String bduser = "root";
-    private static String bdpass = "1n0o9r7";
+    private static String bdpass = "";
 
     public static boolean Salvar(Cliente p) {
 
@@ -48,20 +48,20 @@ public class ClienteDAO {
                     + "`endereco`,`numero`,`complemento`,`bairro`,`cep`,`cidade`,"
                     + "`uf`,`telefone`,`celular`)\n"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-            comando.setString(1, p.getNome());
+           comando.setString(1, p.getNome());
             comando.setString(2, p.getEmail());
-            comando.setString(3, p.getCpf().toString());
-            comando.setObject(4, param);
+            comando.setLong(3, p.getCpf().intValue());
+            comando.setObject(4,param);
             comando.setString(5, p.getSexo());
             comando.setString(6, p.getEndereco());
             comando.setInt(7, p.getNumero());
             comando.setString(8, p.getComplemento());
             comando.setString(9, p.getBairro());
-            comando.setInt(10, p.getCep().intValue());
+            comando.setLong(10, p.getCep().intValue());
             comando.setString(11, p.getCidade());
             comando.setString(12, p.getUf());
-            comando.setInt(13, Integer.valueOf(p.getTelefone().intValue()));
-            comando.setInt(14, Integer.valueOf(p.getCelular().intValue()));
+            comando.setLong(13, Integer.valueOf(p.getTelefone().intValue()));
+            comando.setLong(14, Integer.valueOf(p.getCelular().intValue()));
 
             int linhasAfetadas = comando.executeUpdate();
 

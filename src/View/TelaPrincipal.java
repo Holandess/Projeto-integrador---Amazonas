@@ -908,7 +908,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(txtCelularGC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTelefoneGC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addGap(36, 36, 36)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -983,7 +983,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(469, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Gerenciamento de Clientes", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/boy.png")), jPanel3); // NOI18N
@@ -1170,17 +1170,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
             
             if(modoTela.equals("Criar")){
             Cliente c = new Cliente(txtNomeGC.getText(),
+                    
                     txtEmailGC.getText(),
+                    
                     Long.parseLong(this.txtCPFgc.getText()),
+                    
                     cboSexoGC.getSelectedItem().toString(),
+                    
                     txtEnderecoGC.getText(),
+                    
                     Integer.parseInt(this.txtNumeroGC.getText()),
+                    
                     txtCompGC.getText(),
+                    
                     txtBairroGC.getText(),
+                    
                     Long.parseLong(this.txtCEPgc.getText()),
+                    
                     txtCidadeGC.getText(),
+                    
                     cboUFgc.getSelectedItem().toString(),
+                    
                     Long.parseLong(this.txtTelefoneGC.getText()),
+                    
                     Long.parseLong(this.txtCelularGC.getText())
             );
             
