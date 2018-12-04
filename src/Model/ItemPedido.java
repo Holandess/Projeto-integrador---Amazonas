@@ -18,19 +18,42 @@ public class ItemPedido {
     private int idProduto;
     private int qtd;
     private float valor;
-
+    private String nomeproduto;
+    private String categoriaproduto;
 
     public ItemPedido(int idVenda, int idProduto, int qtd, float valor) {
-        
+
         this.idVenda = idVenda;
         this.idProduto = idProduto;
         this.qtd = qtd;
         this.valor = valor;
 
+    }
 
+    public ItemPedido() {
+
+
+    }
+
+    public String getNomeproduto() {
+        return nomeproduto;
+    }
+
+    public void setNomeproduto(String nomeproduto) {
+        this.nomeproduto = nomeproduto;
+    }
+
+    public String getCategoriaproduto() {
+        return categoriaproduto;
+    }
+
+    public void setCategoriaproduto(String categoriaproduto) {
+        this.categoriaproduto = categoriaproduto;
     }
     
     
+    
+
     public int getQtd() {
         return qtd;
     }
