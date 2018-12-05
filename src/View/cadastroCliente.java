@@ -423,6 +423,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                     Long.parseLong(this.txtCelular.getText())
             );
             
+            
             ClienteController.Salvar(c);
             JOptionPane.showMessageDialog(this, "Cliente Criado com Sucesso!!");
             this.dispose();

@@ -253,6 +253,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         btnReportGenerate = new javax.swing.JButton();
         pieChart = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        lblValorRelatorio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1042,10 +1044,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel27.setText("Valor Total: R$");
+
+        lblValorRelatorio.setText("0,00");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(490, 490, 490)
+                .addComponent(pieChart)
+                .addGap(328, 932, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1058,12 +1068,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(txtTo))
                     .addComponent(btnReportGenerate))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1225, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(490, 490, 490)
-                .addComponent(pieChart)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblValorRelatorio)
+                .addGap(85, 85, 85))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1081,9 +1093,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReportGenerate))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(100, 100, 100)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(lblValorRelatorio))
+                .addGap(95, 95, 95)
                 .addComponent(pieChart)
-                .addContainerGap(512, Short.MAX_VALUE))
+                .addContainerGap(492, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Relatorios", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/profits.png")), jPanel10); // NOI18N
@@ -1099,7 +1115,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2)
         );
 
         pack();
@@ -1168,7 +1184,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
         // TODO add your handling code here:
         //this.LoadTable();
+        tblProdutos.removeAll();
         this.LoadSearchProduct(txtBuscaProduto.getText(), "cadastroVenda");
+        
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
@@ -1711,12 +1729,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tmProdutos.addColumn("Categoria");
         tmProdutos.addColumn("Quantidade");
         tmProdutos.addColumn("Valor Total");
-
+        
+        double valortotal = 0;
         for (String[] c : linhasProdutos) {
             dataset.setValue(c[0] + " - " + c[2], new Double(c[2]));
+            valortotal = valortotal + new Double(c[3]);
             tmProdutos.addRow(c);
         }
         
+        lblValorRelatorio.setText(Double.toString(valortotal));
         
         JFreeChart chart = ChartFactory.createPieChart(
                 "Grafico de Produtos Vendidos", // chart title
@@ -1811,6 +1832,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1839,6 +1861,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblValor;
+    private javax.swing.JLabel lblValorRelatorio;
     private javax.swing.JLabel pieChart;
     private javax.swing.JTable tblCarrinho;
     private javax.swing.JTable tblClienteCadastradoGC;

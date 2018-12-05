@@ -31,7 +31,7 @@ public class ClienteDAO {
     private static String BASEDADOS = "lojainformatica";
     private static Connection conexao;
     private static String bduser = "root";
-    private static String bdpass = "1n0o9r7";
+    private static String bdpass = "";
 
     
     
@@ -65,7 +65,7 @@ public class ClienteDAO {
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
             comando.setString(1, p.getNome());
             comando.setString(2, p.getEmail());
-            comando.setLong(3, p.getCpf().intValue());
+            comando.setLong(3, p.getCpf());
             comando.setObject(4, param);
             comando.setString(5, p.getSexo());
             comando.setString(6, p.getEndereco());

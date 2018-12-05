@@ -26,7 +26,7 @@ public class VendasDAO {
     private static String BASEDADOS = "lojainformatica";
     private static Connection conexao;
     private static String bduser = "root";
-    private static String bdpass = "1n0o9r7";
+    private static String bdpass = "";
 
     
     /**Método para salvar venda no banco de dados 

@@ -374,7 +374,6 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtCPF">
               <Properties>
-                <Property name="text" type="java.lang.String" value=""/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -383,14 +382,8 @@
             <Component class="javax.swing.JFormattedTextField" name="txtCelular">
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
-              <Properties>
-                <Property name="text" type="java.lang.String" value=""/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtNumero">
-              <Properties>
-                <Property name="text" type="java.lang.String" value=""/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
