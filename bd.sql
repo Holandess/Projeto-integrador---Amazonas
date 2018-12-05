@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: localhost    Database: lojainformatica
+-- Host: 127.0.0.1    Database: lojainformatica
 -- ------------------------------------------------------
 -- Server version	5.7.24-0ubuntu0.16.04.1
 
@@ -39,7 +39,7 @@ CREATE TABLE `clientes` (
   `celular` int(16) DEFAULT NULL,
   `date_entered` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'teste','teste@teste.com.br','-1592937450','Masculino','teste',123,'','teste',4433050,'Sao PAulo','SP',1239123,-466215869,'2018-11-22 00:00:00'),(2,'Teste','teste@teste.com.br','45651702806','Masculino','oscar de barros',888,'1','JArdim itapura',4433050,'Sao PAUlo','SP',15231241,123123123,'2018-11-26 14:54:08');
+INSERT INTO `clientes` VALUES (4,'Pedro','pedro@hotmail.com','-1592937450','Masculino','Oscar de Barros',888,'1','Jardim Itapura',4433050,'Sao Paulo','SP',124123312,154123141,'2018-12-05 13:28:43'),(5,'Valdir Pereira','valdir.pereira@bol.net','-1592937450','Masculino','Avenida Paulista',21413,'123','Jardins',4433002,'Sao Paulo','SP',-920436723,-1639778765,'2018-12-05 13:30:21');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,8 +66,12 @@ CREATE TABLE `item_pedido` (
   `qtd` int(3) unsigned NOT NULL,
   `valor` float unsigned NOT NULL,
   `date_entered` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `idvenda` (`idvenda`),
+  KEY `idproduto` (`idproduto`),
+  CONSTRAINT `item_pedido_ibfk_1` FOREIGN KEY (`idvenda`) REFERENCES `vendas` (`id`),
+  CONSTRAINT `item_pedido_ibfk_2` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`codproduto`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +80,7 @@ CREATE TABLE `item_pedido` (
 
 LOCK TABLES `item_pedido` WRITE;
 /*!40000 ALTER TABLE `item_pedido` DISABLE KEYS */;
-INSERT INTO `item_pedido` VALUES (6,6,3,20,246820,'2018-11-28 21:54:44'),(7,7,3,20,246820,'2018-11-28 21:55:41'),(8,7,3,20,246820,'2018-11-28 21:55:41'),(9,8,3,12,148092,'2018-11-28 22:00:36'),(10,8,3,12,148092,'2018-11-28 22:00:36'),(11,9,3,1,12341,'2018-11-28 22:02:13'),(12,10,3,12,148092,'2018-11-28 22:03:35'),(13,11,3,12,148092,'2018-11-28 22:03:48'),(14,12,3,12,148092,'2018-11-28 22:16:06'),(15,13,3,12,148092,'2018-11-28 22:16:35'),(16,14,3,12,148092,'2018-11-28 22:16:51'),(17,15,3,12,148092,'2018-11-28 22:17:16'),(18,16,3,12,148092,'2018-11-28 22:17:49'),(19,17,3,12,148092,'2018-11-28 22:19:56');
+INSERT INTO `item_pedido` VALUES (23,20,4,19,12350,'2018-12-05 13:32:30'),(24,20,5,14,4200,'2018-12-05 13:32:30');
 /*!40000 ALTER TABLE `item_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +100,7 @@ CREATE TABLE `produtos` (
   `valor` float DEFAULT NULL,
   `date_entered` datetime DEFAULT NULL,
   PRIMARY KEY (`codproduto`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +109,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (3,'Notebook','Notebook Acer','Notebook Acer muito',51,12341,'2018-11-26 15:50:35');
+INSERT INTO `produtos` VALUES (4,'Computador','Computador Positivo','Computador Poisitivo com 4GB de Ram e 200GB de HD',40,650,'2018-12-05 13:31:19'),(5,'Peças','Mouse Razer','Mouse Gamer com 6900dpi para jogos fps',120,300,'2018-12-05 13:31:53');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,8 +126,10 @@ CREATE TABLE `vendas` (
   `meiodepagamento` varchar(20) NOT NULL,
   `idcliente` int(6) unsigned NOT NULL,
   `date_entered` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `idcliente` (`idcliente`),
+  CONSTRAINT `vendas_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `clientes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +138,7 @@ CREATE TABLE `vendas` (
 
 LOCK TABLES `vendas` WRITE;
 /*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
-INSERT INTO `vendas` VALUES (5,148092,'Dinheiro',1,'2018-11-28 01:27:59'),(6,246820,'Cartão de Crédito',1,'2018-11-28 21:54:44'),(7,493640,'Cartão de Crédito',1,'2018-11-28 21:55:41'),(8,296184,'Dinheiro',1,'2018-11-28 22:00:36'),(9,12341,'Dinheiro',2,'2018-11-28 22:02:13'),(10,148092,'Dinheiro',1,'2018-11-28 22:03:35'),(11,148092,'Dinheiro',2,'2018-11-28 22:03:48'),(12,148092,'Dinheiro',1,'2018-11-28 22:16:06'),(13,148092,'Dinheiro',1,'2018-11-28 22:16:35'),(14,148092,'Dinheiro',1,'2018-11-28 22:16:51'),(15,148092,'Dinheiro',2,'2018-11-28 22:17:16'),(16,148092,'Dinheiro',2,'2018-11-28 22:17:49'),(17,148092,'Dinheiro',2,'2018-11-28 22:19:56');
+INSERT INTO `vendas` VALUES (20,16550,'Dinheiro',4,'2018-12-05 13:32:30');
 /*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -145,4 +151,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 22:24:53
+-- Dump completed on 2018-12-05 13:34:27
