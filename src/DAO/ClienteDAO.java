@@ -31,7 +31,7 @@ public class ClienteDAO {
     private static String BASEDADOS = "lojainformatica";
     private static Connection conexao;
     private static String bduser = "root";
-    private static String bdpass = "1n0o9r7";
+    private static String bdpass = "";
 
     public static boolean Salvar(Cliente p) {
 
