@@ -7,14 +7,24 @@ package Controller;
 
 import DAO.UsuarioDAO;
 
-/**
- *
- * @author guilherme
- */
 public class UsuarioController {
-    
-        public static boolean Logar(String usuario, String senha) {
-            return UsuarioDAO.logar(usuario, senha);
-        }
-    
+
+    /**
+     * Método para Logar no sistema
+     *
+     * Usa valores do UsuarioDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param usuario String - valor usado para login
+     * @param senha String - valor usado para login
+     *
+     * @return usuario, senha
+     *
+     */
+
+    public static boolean Logar(String usuario, String senha) {
+        return UsuarioDAO.logar(usuario, senha);
+    }
+
 }

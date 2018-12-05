@@ -15,19 +15,68 @@ import java.util.ArrayList;
  */
 public class ClienteController {
 
+    /**
+     * Método para salvar cliente
+     *
+     * Pega os valores do ClienteDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param p - Conjunto de informações do cliente.
+     *
+     *
+     * @return p
+     */
     public static boolean Salvar(Cliente p) {
         return ClienteDAO.Salvar(p);
     }
-    
+
+    /**
+     * Método para Excluir cliente
+     *
+     * Usa os valores do ClienteDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param id - Conjunto de informações do cliente.
+     *
+     *
+     * @return id
+     *
+     */
     public static boolean Excluir(String id) {
         //FProduto p = new Produto();
         return ClienteDAO.Excluir(id);
     }
-    
+
+    /**
+     * Método para Atualizar cliente
+     *
+     * Usa os valores do ClienteDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param p - Conjunto de informações do cliente.
+     *
+     *
+     * @return p *
+     */
     public static boolean Atualizar(Cliente p) {
         return ClienteDAO.atualizar(p);
     }
 
+    /**
+     * Método para buscar cliente
+     *
+     * Usa os valores do ClienteDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param busca String - valor a ser pesquisado.
+     *
+     *
+     * @return ArrayList *
+     */
     public static ArrayList<String[]> buscaCliente(String busca) {
         ArrayList<Cliente> clientes = ClienteDAO.buscaClientes(busca);
         ArrayList<String[]> listaClientes = new ArrayList<>();
@@ -40,7 +89,23 @@ public class ClienteController {
 
         return listaClientes;
     }
-    
-     
+
+    /**
+     * Método para buscar cliente pelo ID
+     *
+     * Usa os valores do ClienteDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param id String - valor a ser pesquisado.
+     *
+     *
+     * @return ArrayList *
+     */
+    public static ArrayList<Cliente> buscaClientePeloId(String id) {
+        ArrayList<Cliente> clientes = ClienteDAO.buscaClientePeloId(id);
+
+        return clientes;
+    }
 
 }

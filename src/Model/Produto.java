@@ -11,6 +11,26 @@ public class Produto {
     private int qtdProduto;
     private float valorUnitario;
 
+    /**
+     * Construtor Produto
+     *
+     * Recebe todos os dados do produto
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param Categoria String - Categoria do produto
+     *
+     * @param nomeProduto int - Nome do produto
+     *
+     * @param descProduto String - Descrição do produto
+     *
+     * @param qtdProduto int - Quantidade do produto
+     *
+     * @param valorUnitario float - Valor Unitario do produto
+     *
+     *
+     *
+     */
     public Produto(String Categoria, String nomeProduto, String descProduto, int qtdProduto, float valorUnitario) {
 
         this.Categoria = Categoria;

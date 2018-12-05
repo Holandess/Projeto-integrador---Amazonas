@@ -29,6 +29,20 @@ public class ItemPedidoDAO {
     private static String bduser = "root";
     private static String bdpass = "";
 
+    
+    /**Método para salvar o pedido. 
+
+     * Pega os valores que foram solicitados para o pedido e salva no banco.
+
+     * @author Guilherme Gomes
+
+     * @param  p  - Conjunto de informações do pedido.
+
+    
+     * @return boolean 
+
+     */
+    
     public static boolean Salvar(ItemPedido p) {
         try {
             java.util.Date date = new Date();
@@ -69,6 +83,23 @@ public class ItemPedidoDAO {
 
         return true;
     }
+    
+    /**Método para selecionar no banco itens do pedido 
+
+     * Busca os itens do pedido, quantidade dos produtos e nome do produto
+
+     * @author Guilherme Gomes
+
+     * @param  from String  - ? .
+     * 
+     * @param  to String  -  ?.
+    
+     * @return ArrayList
+
+     */
+    
+    
+    
 
     public static ArrayList<ItemPedido> getReports(String from, String to) {
         

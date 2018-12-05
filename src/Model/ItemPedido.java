@@ -21,6 +21,24 @@ public class ItemPedido {
     private String nomeproduto;
     private String categoriaproduto;
 
+    /**
+     * Construtor Item Pedido
+     *
+     * Recebe todos os dados do pedido
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param idVenda int - id do pedido
+     *
+     * @param idProduto int - id do produto
+     *
+     * @param qtd int - Quantidade produto
+     *
+     * @param valor float - Valor produto
+     *
+     *
+     *
+     */
     public ItemPedido(int idVenda, int idProduto, int qtd, float valor) {
 
         this.idVenda = idVenda;
@@ -31,7 +49,6 @@ public class ItemPedido {
     }
 
     public ItemPedido() {
-
 
     }
 
@@ -50,9 +67,6 @@ public class ItemPedido {
     public void setCategoriaproduto(String categoriaproduto) {
         this.categoriaproduto = categoriaproduto;
     }
-    
-    
-    
 
     public int getQtd() {
         return qtd;

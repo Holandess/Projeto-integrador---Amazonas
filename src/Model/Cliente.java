@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Model;
+
 import java.util.Random;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Random;
  */
 public class Cliente {
 
-    private int id ;
+    private int id;
     private String nome;
     private String email;
     private Long cpf;
@@ -27,8 +28,44 @@ public class Cliente {
     private Long telefone;
     private Long celular;
 
-    public Cliente(String Nome, String email, Long cpf, String sexo,String endereco,int numero,String complemento, String bairro, Long cep, String cidade, String uf, Long telefone, Long celular) {
-        
+    /**
+     * Construtor Cliente
+     *
+     * Recebe todos os dados do cliente
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param Nome String - Nome cliente
+     *
+     * @param email String - E-Mail Cliente
+     *
+     * @param cpf Long - CPF Cliente
+     *
+     * @param sexo String - Sexo Cliente
+     *
+     * @param endereco String - Endereco Cliente
+     *
+     * @param numero int - Numero de endereço
+     *
+     * @param complemento String - Complemento Endereço
+     *
+     * @param bairro String - Bairro Cliente
+     *
+     * @param cep Long - CEP Cliente
+     *
+     * @param cidade String - Cidade Cliente
+     *
+     * @param uf String - UF Cliente
+     *
+     * @param telefone Long - Telefone Cliente
+     *
+     * @param celular Long - Celular Cliente
+     *
+     *
+     *
+     */
+    public Cliente(String Nome, String email, Long cpf, String sexo, String endereco, int numero, String complemento, String bairro, Long cep, String cidade, String uf, Long telefone, Long celular) {
+
         this.nome = Nome;
         this.email = email;
         this.cpf = cpf;
@@ -43,8 +80,7 @@ public class Cliente {
         this.telefone = telefone;
         this.celular = celular;
     }
-    
-    
+
     public int getId() {
         return id;
     }
@@ -76,7 +112,7 @@ public class Cliente {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -156,7 +192,5 @@ public class Cliente {
     public void setCelular(Long celular) {
         this.celular = celular;
     }
-    
-    
 
 }

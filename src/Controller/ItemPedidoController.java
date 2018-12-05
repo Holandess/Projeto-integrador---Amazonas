@@ -15,6 +15,18 @@ import java.util.ArrayList;
  */
 public class ItemPedidoController {
 
+    /**
+     * Método para salvar cliente
+     *
+     * Pega os valores do ItemPedidoDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param p - Conjunto de informações do pedido.
+     *
+     *
+     * @return p
+     */
     public static boolean Salvar(ItemPedido p) {
 
         return ItemPedidoDAO.Salvar(p);

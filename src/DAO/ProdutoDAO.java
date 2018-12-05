@@ -29,6 +29,20 @@ public class ProdutoDAO {
     private static String bduser = "root";
     private static String bdpass = "";
 
+    
+    /**Método para salvar produto no banco de dados 
+
+     * Salva o produto no banco de dados ao cadastrar.
+
+     * @author Guilherme Gomes
+
+     * @param  p - informações do produto que será cadastrado
+     
+    
+     * @return boolean
+
+     */
+    
     public static boolean Salvar(Produto p) {
         try {
             java.util.Date date = new Date();
@@ -72,6 +86,19 @@ public class ProdutoDAO {
         return true;
     }
 
+    /**Método para atualizar produto no banco de dados 
+
+     * Atualizar/Editar o produto no banco de dados.
+
+     * @author Guilherme Gomes
+
+     * @param  p - informações do produto que será atualizado/editado
+     
+    
+     * @return boolean
+
+     */
+    
     public static boolean atualizar(Produto p) {
         try {
 
@@ -98,6 +125,18 @@ public class ProdutoDAO {
         return true;
     }
     
+    /**Método para excluir produto no banco de dados 
+
+     * Exclui o produto no banco de dados ao selecionar excluir.
+
+     * @author Guilherme Gomes
+
+     * @param  id - id do produto que será excluido
+     
+    
+     * @return boolean
+
+     */
         public static boolean Excluir(String id) {
         try {
 
@@ -118,6 +157,19 @@ public class ProdutoDAO {
 
         return true;
     }
+        
+        /**Método para buscar produto no banco de dados 
+
+     * Busca o produto no banco de dados pelo nome ou código do produto.
+
+     * @author Guilherme Gomes
+
+     * @param  busca String - nome ou codigo do produto.
+     
+    
+     * @return ArrayList
+
+     */
 
     public static ArrayList<Produto> buscaProdutos(String busca) {
         ArrayList<Produto> listaProdutos;
