@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pi;
+package Inicio;
 
 import View.login;
 
@@ -11,7 +11,7 @@ import View.login;
  *
  * @author guilherme
  */
-public class PI {
+public class Inicio {
 
     /**
      * @param args the command line arguments
