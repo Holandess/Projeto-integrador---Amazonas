@@ -41,6 +41,12 @@ public class ClienteController {
         return listaClientes;
     }
     
+        public static ArrayList<Cliente> buscaClientePeloId(String id) {
+        ArrayList<Cliente> clientes = ClienteDAO.buscaClientePeloId(id);
+
+        return clientes;
+    }
+    
      
 
 }

@@ -1336,20 +1336,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if (tblClienteCadastradoGC.getSelectedRow() >= 0) {
                 HabilitarFormulario();
                 modoTela = "Editar";
+                
+                ArrayList<Cliente> clientes = ClienteController.buscaClientePeloId(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 0).toString());
 
-                txtNomeGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 1).toString());
-                txtCPFgc.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 2).toString());
-                txtEnderecoGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 3).toString());
-                txtBairroGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 4).toString());
-                txtCidadeGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 5).toString());
-                txtTelefoneGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 6).toString());
-                txtEmailGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 7).toString());
-                cboSexoGC.setSelectedItem(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 8).toString());
-                txtNumeroGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 9).toString());
-                txtCompGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 10).toString());
-                txtCEPgc.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 11).toString());
-                cboUFgc.setSelectedItem(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 12).toString());
-                txtCelularGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 13).toString());
+                txtNomeGC.setText(clientes.get(0).getNome());
+                txtCPFgc.setText(clientes.get(0).getCpf().toString());
+                txtEnderecoGC.setText(clientes.get(0).getEndereco());
+                txtBairroGC.setText(clientes.get(0).getBairro());
+                txtCidadeGC.setText(clientes.get(0).getCidade());
+                txtTelefoneGC.setText(clientes.get(0).getTelefone().toString());
+                txtEmailGC.setText(clientes.get(0).getEmail());
+                cboSexoGC.setSelectedItem(clientes.get(0).getSexo());
+                txtNumeroGC.setText(Integer.toString(clientes.get(0).getNumero()));
+                txtCompGC.setText(clientes.get(0).getComplemento());
+                txtCEPgc.setText(clientes.get(0).getCep().toString());
+                cboUFgc.setSelectedItem(clientes.get(0).getUf());
+                txtCelularGC.setText(clientes.get(0).getCelular().toString());
 
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione um cliente para editar!");
