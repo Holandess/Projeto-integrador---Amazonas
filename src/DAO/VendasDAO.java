@@ -28,6 +28,20 @@ public class VendasDAO {
     private static String bduser = "root";
     private static String bdpass = "1n0o9r7";
 
+    
+    /**Método para salvar venda no banco de dados 
+
+     * Salva os dados da venda no banco de dados ao finalizar pagamento.
+
+     * @author Guilherme Gomes
+
+     * @param  v - informações da venda que será registrada
+     
+    
+     * @return v.getIdVenda 
+
+     */
+    
     public static int Salvar(Venda v) {
 
         try {

@@ -16,12 +16,22 @@ import Model.ItemPedido;
 import Model.Produto;
 import Model.Venda;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -43,13 +53,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
                 //System.out.println(p.getDescProduto());
-
                 lblNomeProduto.setText(p.getNomeProduto());
                 txtDescricaoProduto.setText(p.getDescProduto());
+
             }
         });
         this.listaCarrinho = new ArrayList<>();
-
+        pieChart.setVisible(false);
     }
 
     public void LimparFormularioCadProduto() {
@@ -59,7 +69,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtQtdProduto.setText("");
         txtVlrUnitarioProd.setText("");
     }
-    
+
     public void LimparFormularioGcClientes() {
         txtNomeGC.setText("");
         txtCPFgc.setText("");
@@ -195,14 +205,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnCancelaCadastro = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProdutosCadastrados = new javax.swing.JTable();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tblResultados = new javax.swing.JTable();
-        txtFrom = new javax.swing.JTextField();
-        txtTo = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        btnReportGenerate = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -242,6 +244,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnBuscaClienteGC = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClienteCadastradoGC = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblResultados = new javax.swing.JTable();
+        txtFrom = new javax.swing.JTextField();
+        txtTo = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        btnReportGenerate = new javax.swing.JButton();
+        pieChart = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -504,7 +515,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -715,77 +726,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(539, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Estoque de Produtos", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/package.png")), jPanel1); // NOI18N
-
-        tblResultados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Produto", "Categoria", "Quantidade", "Valor Total"
-            }
-        ));
-        jScrollPane7.setViewportView(tblResultados);
-
-        txtFrom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFromActionPerformed(evt);
-            }
-        });
-
-        jLabel25.setText("De");
-
-        jLabel26.setText("Ate");
-
-        btnReportGenerate.setText("Gerar Relatorio");
-        btnReportGenerate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReportGenerateActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel26))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                        .addComponent(txtTo))
-                    .addComponent(btnReportGenerate))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel26))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnReportGenerate))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(861, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Relatorios", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/profits.png")), jPanel10); // NOI18N
 
         jLabel7.setText("Nome: ");
 
@@ -1066,10 +1010,83 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Gerenciamento de Clientes", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/boy.png")), jPanel3); // NOI18N
+
+        tblResultados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Produto", "Categoria", "Quantidade", "Valor Total"
+            }
+        ));
+        jScrollPane7.setViewportView(tblResultados);
+
+        txtFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFromActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setText("De");
+
+        jLabel26.setText("Ate");
+
+        btnReportGenerate.setText("Gerar Relatorio");
+        btnReportGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportGenerateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                        .addComponent(txtTo))
+                    .addComponent(btnReportGenerate))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(490, 490, 490)
+                .addComponent(pieChart)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnReportGenerate))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(100, 100, 100)
+                .addComponent(pieChart)
+                .addContainerGap(512, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Relatorios", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/profits.png")), jPanel10); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1082,7 +1099,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
         );
 
         pack();
@@ -1301,8 +1318,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClienteActionPerformed
         // TODO add your handling code here:
-       LimparFormularioGcClientes();
-       DesabilitarFormularioGC();
+        LimparFormularioGcClientes();
+        DesabilitarFormularioGC();
     }//GEN-LAST:event_btnCancelarClienteActionPerformed
 
     private void cboSexoGCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSexoGCActionPerformed
@@ -1318,22 +1335,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if (tblClienteCadastradoGC.getSelectedRow() >= 0) {
                 HabilitarFormulario();
                 modoTela = "Editar";
-                  
                 
-                
-                txtNomeGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 1).toString());
-                txtCPFgc.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 2).toString());
-                txtEnderecoGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 3).toString());
-                txtBairroGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 4).toString());
-                txtCidadeGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 5).toString());
-                txtTelefoneGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 6).toString());
-                txtEmailGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 7).toString());
-                cboSexoGC.setSelectedItem(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 8).toString());
-                txtNumeroGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 9).toString());
-                txtCompGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 10).toString());
-                txtCEPgc.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 11).toString());
-                cboUFgc.setSelectedItem(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 12).toString());
-                txtCelularGC.setText(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 13).toString());
+                ArrayList<Cliente> clientes = ClienteController.buscaClientePeloId(tblClienteCadastradoGC.getModel().getValueAt(tblClienteCadastradoGC.getSelectedRow(), 0).toString());
+
+                txtNomeGC.setText(clientes.get(0).getNome());
+                txtCPFgc.setText(clientes.get(0).getCpf().toString());
+                txtEnderecoGC.setText(clientes.get(0).getEndereco());
+                txtBairroGC.setText(clientes.get(0).getBairro());
+                txtCidadeGC.setText(clientes.get(0).getCidade());
+                txtTelefoneGC.setText(clientes.get(0).getTelefone().toString());
+                txtEmailGC.setText(clientes.get(0).getEmail());
+                cboSexoGC.setSelectedItem(clientes.get(0).getSexo());
+                txtNumeroGC.setText(Integer.toString(clientes.get(0).getNumero()));
+                txtCompGC.setText(clientes.get(0).getComplemento());
+                txtCEPgc.setText(clientes.get(0).getCep().toString());
+                cboUFgc.setSelectedItem(clientes.get(0).getUf());
+                txtCelularGC.setText(clientes.get(0).getCelular().toString());
 
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione um cliente para editar!");
@@ -1364,6 +1381,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportGenerateActionPerformed
         // TODO add your handling code here:
         this.LoadReport(txtFrom.getText(), txtTo.getText());
+  
     }//GEN-LAST:event_btnReportGenerateActionPerformed
 
     /**
@@ -1650,7 +1668,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tmClientes.addColumn("Nome Completo");
         tmClientes.addColumn("CPF");
         tmClientes.addColumn("E-Mail");
-        
 
         for (String[] c : linhasClientes) {
             tmClientes.addRow(c);
@@ -1680,10 +1697,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tblProdutosCadastrados.setModel(tmProdutos);
         }
     }
-    
-        public void LoadReport(String from, String to) {
+
+    public void LoadReport(String from, String to) {
 
         ArrayList<String[]> linhasProdutos = ItemPedidoController.getReports(from, to);
+        
+              
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
 
         DefaultTableModel tmProdutos = new DefaultTableModel();
         tmProdutos.addColumn("Produto");
@@ -1692,10 +1713,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tmProdutos.addColumn("Valor Total");
 
         for (String[] c : linhasProdutos) {
+            dataset.setValue(c[0] + " - " + c[2], new Double(c[2]));
             tmProdutos.addRow(c);
         }
         
-            tblResultados.setModel(tmProdutos);
+        
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Grafico de Produtos Vendidos", // chart title
+                dataset, // data
+                true, // include legend
+                true,
+                false);
+        
+        int width = 640;
+        /* Width of the image */
+        int height = 480;
+        /* Height of the image */
+        File pieChart = new File("src/View/imgs/PieChart.jpeg");
+        try {
+            ChartUtilities.saveChartAsJPEG(pieChart, chart, width, height);
+            //pieChart.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("src/View/imgs/PieChart.jpeg"));
+        } catch (IOException e) {
+            
+        }
+
+        this.pieChart.setIcon(new javax.swing.ImageIcon(img));
+        this.pieChart.setVisible(true);
+
+        tblResultados.setModel(tmProdutos);
 
     }
 
@@ -1787,6 +1839,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblValor;
+    private javax.swing.JLabel pieChart;
     private javax.swing.JTable tblCarrinho;
     private javax.swing.JTable tblClienteCadastradoGC;
     private javax.swing.JTable tblClientes;

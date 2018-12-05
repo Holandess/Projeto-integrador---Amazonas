@@ -19,6 +19,24 @@ public class Usuario {
     private String nomeCompleto;
     private String email;
 
+    /**
+     * Construtor Usuario
+     *
+     * Recebe todos os dados do usuario
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param login String - Login usuario
+     *
+     * @param senha String - Senha do usuario
+     *
+     * @param nomeCompleto String - Nome do usuario      *
+     * @param email String - E-Mail do usuario
+     *
+     *
+     *
+     *
+     */
     public Usuario(String login, String senha, String nomeCompleto, String email) {
         Random random = new Random();
         this.id = random.nextInt(1000) + 0;

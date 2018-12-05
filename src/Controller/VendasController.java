@@ -13,9 +13,20 @@ import Model.Venda;
  * @author guilherme.gmonteiro3
  */
 public class VendasController {
-    
-    
 
+    /**
+     * Método para Salvar venda
+     *
+     * Usa valores do VendasDAO.
+     *
+     * @author Guilherme Gomes/Enzo Amorim
+     *
+     * @param v - dados da venda
+     *
+     *
+     * @return v
+     *
+     */
     public static int Salvar(Venda v) {
 
         return VendasDAO.Salvar(v);

@@ -33,6 +33,21 @@ public class ClienteDAO {
     private static String bduser = "root";
     private static String bdpass = "1n0o9r7";
 
+    
+    
+     /**Método para salvar cliente 
+
+     * Pega os valores do Cliente e passa para o banco de dados.
+
+     * @author Guilherme Gomes
+
+     * @param  Cliente p  - Conjunto de informações do cliente.
+
+    
+     * @return boolean 
+
+     */
+    
     public static boolean Salvar(Cliente p) {
 
         try {
@@ -74,6 +89,19 @@ public class ClienteDAO {
         return true;
     }
 
+    /**Método para atualizar os dados do cliente 
+
+     * Atualiza os dados de cliente no banco de dados
+
+     * @author Guilherme Gomes
+
+     * @param  Cliente p  - Conjunto de informações do cliente.
+
+    
+     * @return boolean 
+
+     */
+    
     public static boolean atualizar(Cliente p) {
         try {
 
@@ -82,7 +110,7 @@ public class ClienteDAO {
             conexao = DriverManager.getConnection(url, bduser, bdpass);
             //Object param = new java.sql.Timestamp(date.getTime());
             PreparedStatement comando = conexao.prepareStatement("UPDATE clientes SET nome = ?,"
-                    + " email = ?, cpf = ?, date_entered = ? , sexo = ?,"
+                    + " email = ?, cpf = ?, sexo = ?,"
                     + " endereco = ?, numero = ?,complemento = ?, bairro = ?, cep = ?,cidade = ?,"
                     + " uf = ?, telefone = ?, celular = ? WHERE id = ?");
 
@@ -90,17 +118,17 @@ public class ClienteDAO {
             comando.setString(2, p.getEmail());
             comando.setString(3, p.getCpf().toString());
             // comando.setObject(4, param);
-            comando.setString(5, p.getSexo());
-            comando.setString(6, p.getEndereco());
-            comando.setInt(7, p.getNumero());
-            comando.setString(8, p.getComplemento());
-            comando.setString(9, p.getBairro());
-            comando.setInt(10, p.getCep().intValue());
-            comando.setString(11, p.getCidade());
-            comando.setString(12, p.getUf());
-            comando.setInt(13, Integer.valueOf(p.getTelefone().intValue()));
-            comando.setInt(14, Integer.valueOf(p.getCelular().intValue()));
-            comando.setInt(15, p.getId());
+            comando.setString(4, p.getSexo());
+            comando.setString(5, p.getEndereco());
+            comando.setInt(6, p.getNumero());
+            comando.setString(7, p.getComplemento());
+            comando.setString(8, p.getBairro());
+            comando.setInt(9, p.getCep().intValue());
+            comando.setString(10, p.getCidade());
+            comando.setString(11, p.getUf());
+            comando.setInt(12, Integer.valueOf(p.getTelefone().intValue()));
+            comando.setInt(13, Integer.valueOf(p.getCelular().intValue()));
+            comando.setInt(14, p.getId());
 
             int linhasAfetadas = comando.executeUpdate();
 
@@ -112,6 +140,20 @@ public class ClienteDAO {
 
         return true;
     }
+    
+    
+    /**Método para buscar os dados dos clientes  
+
+     * Busca os dados do cliente do banco de dados.
+
+     * @author Guilherme Gomes
+
+     * @param  busca String  - Dados digitados para fazer a busca nome/cpf.
+
+    
+     * @return ArrayList 
+
+     */
 
     public static ArrayList<Cliente> buscaClientes(String busca) {
         ArrayList<Cliente> listaClientes;
@@ -154,6 +196,72 @@ public class ClienteDAO {
 
         return listaClientes;
     }
+    
+    
+        /**Método para buscar o cliente pelo Id 
+
+     * Busca o cliente no banco de dados pelo Id
+
+     * @author Guilherme Gomes
+
+     * @param  id String  - id do cliente.
+
+    
+     * @return ArrayList
+
+     */
+        public static ArrayList<Cliente> buscaClientePeloId(String id) {
+        ArrayList<Cliente> listaClientes;
+        listaClientes = new ArrayList<Cliente>();
+        try {
+            //return SimulaDB.getInstance().SalvarCliente(p);
+            Class.forName("com.mysql.jdbc.Driver");
+            url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
+            conexao = DriverManager.getConnection(url, bduser, bdpass);
+            PreparedStatement comando = conexao.prepareStatement("select * from clientes WHERE id = ?");
+            comando.setString(1, id);
+
+            ResultSet rs = comando.executeQuery();
+            while (rs.next()) {
+                Cliente c = new Cliente(rs.getString("nome"),
+                        rs.getString("email"),
+                        Long.parseLong(rs.getString("cpf")),
+                        rs.getString("sexo"),
+                        rs.getString("endereco"),
+                        Integer.parseInt(rs.getString("numero")),
+                        rs.getString("complemento"),
+                        rs.getString("bairro"),
+                        Long.parseLong(rs.getString("cep")),
+                        rs.getString("cidade"),
+                        rs.getString("uf"),
+                        Long.parseLong(rs.getString("telefone")),
+                        Long.parseLong(rs.getString("celular")));
+                c.setId(rs.getInt("id"));
+                listaClientes.add(c);
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listaClientes;
+    }
+        
+        /**Método para Excluir cliente 
+
+     * Exclui o cliente do banco de dados pelo id.
+
+     * @author Guilherme Gomes
+
+     * @param  id String  - id do cliente.
+
+    
+     * @return boolean 
+
+     */
 
     public static boolean Excluir(String id) {
         try {
