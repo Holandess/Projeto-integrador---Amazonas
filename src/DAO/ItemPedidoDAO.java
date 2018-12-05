@@ -9,7 +9,9 @@ import Model.ItemPedido;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +68,42 @@ public class ItemPedidoDAO {
         }
 
         return true;
+    }
+
+    public static ArrayList<ItemPedido> getReports(String from, String to) {
+        
+        ArrayList<ItemPedido> listaProdutos = new ArrayList<ItemPedido>();
+
+        try {
+            //return SimulaDB.getInstance().SalvarCliente(p);
+            Class.forName("com.mysql.jdbc.Driver");
+            url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
+            conexao = DriverManager.getConnection(url, bduser, bdpass);
+            PreparedStatement comando = conexao.prepareStatement("SELECT p.nome, p.categoria, sum(ip.qtd) as qtd,"
+                    + " sum(ip.valor) as valor FROM item_pedido ip INNER JOIN"
+                    + " produtos p ON(p.codproduto = ip.idproduto)"
+                    + "WHERE ip.date_entered BETWEEN ? AND ?" 
+                    + " GROUP BY p.nome, p.categoria");
+            comando.setString(1, from);
+            comando.setString(2, to);
+            ResultSet rs = comando.executeQuery();
+            while (rs.next()) {
+                ItemPedido p = new ItemPedido();
+                p.setQtd(rs.getInt("qtd"));
+                p.setValor(rs.getFloat("valor"));
+                p.setNomeproduto(rs.getString("nome"));
+                p.setCategoriaproduto(rs.getString("categoria"));
+                listaProdutos.add(p);
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listaProdutos;
     }
 
 }

@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class ClienteController {
 
-    public static boolean Salvar(Cliente c) {
-        return ClienteDAO.Salvar(c);
+    public static boolean Salvar(Cliente p) {
+        return ClienteDAO.Salvar(p);
     }
     
     public static boolean Excluir(String id) {
@@ -40,5 +40,7 @@ public class ClienteController {
 
         return listaClientes;
     }
+    
+     
 
 }

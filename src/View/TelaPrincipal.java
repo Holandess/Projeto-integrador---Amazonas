@@ -9,17 +9,29 @@ import Controller.ClienteController;
 import Controller.ItemPedidoController;
 import Controller.ProdutoController;
 import Controller.VendasController;
+import DAO.ClienteDAO;
+
 import Model.Cliente;
 import Model.ItemPedido;
 import Model.Produto;
 import Model.Venda;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -36,6 +48,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         DesabilitarFormulario();
+        DesabilitarFormularioGC();
         tblProdutos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 Produto p = ProdutoController.getProdutoById(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
@@ -43,10 +56,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
                 lblNomeProduto.setText(p.getNomeProduto());
                 txtDescricaoProduto.setText(p.getDescProduto());
+
             }
         });
         this.listaCarrinho = new ArrayList<>();
-
+        pieChart.setVisible(false);
     }
 
     public void LimparFormularioCadProduto() {
@@ -55,6 +69,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtPesquisaProduto.setText("");
         txtQtdProduto.setText("");
         txtVlrUnitarioProd.setText("");
+    }
+
+    public void LimparFormularioGcClientes() {
+        txtNomeGC.setText("");
+        txtCPFgc.setText("");
+        txtEnderecoGC.setText("");
+        txtBairroGC.setText("");
+        txtCidadeGC.setText("");
+        txtTelefoneGC.setText("");
+        txtEmailGC.setText("");
+        txtNumeroGC.setText("");
+        txtCompGC.setText("");
+        txtCEPgc.setText("");
+        txtCelularGC.setText("");
     }
 
     private boolean ValidarFormulario() {
@@ -186,6 +214,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         btnReportGenerate = new javax.swing.JButton();
+        pieChart = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -218,7 +247,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnNovoCliente = new javax.swing.JButton();
         btnEditarClienteGC = new javax.swing.JButton();
         btnExcluirCliente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancelarCliente = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         txtBuscaClienteGC = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
@@ -748,6 +777,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(490, 490, 490)
+                .addComponent(pieChart)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -765,7 +798,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReportGenerate))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(861, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(pieChart)
+                .addContainerGap(761, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Relatorios", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/profits.png")), jPanel10); // NOI18N
@@ -851,11 +886,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/delete-2-16.png"))); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/delete-2-16.png"))); // NOI18N
+        btnCancelarCliente.setText("Cancelar");
+        btnCancelarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelarClienteActionPerformed(evt);
             }
         });
 
@@ -928,7 +963,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnExcluirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -974,13 +1009,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(txtCelularGC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTelefoneGC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addGap(36, 36, 36)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditarClienteGC, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -1049,7 +1084,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(469, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Gerenciamento de Clientes", new javax.swing.ImageIcon(getClass().getResource("/View/imgs/boy.png")), jPanel3); // NOI18N
@@ -1122,6 +1157,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnCancelaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaCadastroActionPerformed
         LimparFormularioCadProduto();
+        DesabilitarFormulario();
     }//GEN-LAST:event_btnCancelaCadastroActionPerformed
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
@@ -1233,63 +1269,59 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (validarFormularioGC()) {
-            
-            if(modoTela.equals("CriarCliente")){
-            Cliente c = new Cliente(txtNomeGC.getText(),
-                    txtEmailGC.getText(),
-                    Long.parseLong(this.txtCPFgc.getText()),
-                    cboSexoGC.getSelectedItem().toString(),
-                    txtEnderecoGC.getText(),
-                    Integer.parseInt(this.txtNumeroGC.getText()),
-                    txtCompGC.getText(),
-                    txtBairroGC.getText(),
-                    Long.parseLong(this.txtCEPgc.getText()),
-                    txtCidadeGC.getText(),
-                    cboUFgc.getSelectedItem().toString(),
-                    Long.parseLong(this.txtTelefoneGC.getText()),
-                    Long.parseLong(this.txtCelularGC.getText())
-            );
-            
-            ClienteController.Salvar(c);
-            JOptionPane.showMessageDialog(this, "Cliente Criado com Sucesso!!");
-            }
-            else{
+
+            if (modoTela.equals("CriarCliente")) {
                 Cliente c = new Cliente(txtNomeGC.getText(),
-                    txtEmailGC.getText(),
-                    Long.parseLong(this.txtCPFgc.getText()),
-                    cboSexoGC.getSelectedItem().toString(),
-                    txtEnderecoGC.getText(),
-                    Integer.parseInt(this.txtNumeroGC.getText()),
-                    txtCompGC.getText(),
-                    txtBairroGC.getText(),
-                    Long.parseLong(this.txtCEPgc.getText()),
-                    txtCidadeGC.getText(),
-                    cboUFgc.getSelectedItem().toString(),
-                    Long.parseLong(this.txtTelefoneGC.getText()),
-                    Long.parseLong(this.txtCelularGC.getText())
-            );
+                        txtEmailGC.getText(),
+                        Long.parseLong(this.txtCPFgc.getText()),
+                        cboSexoGC.getSelectedItem().toString(),
+                        txtEnderecoGC.getText(),
+                        Integer.parseInt(this.txtNumeroGC.getText()),
+                        txtCompGC.getText(),
+                        txtBairroGC.getText(),
+                        Long.parseLong(this.txtCEPgc.getText()),
+                        txtCidadeGC.getText(),
+                        cboUFgc.getSelectedItem().toString(),
+                        Long.parseLong(this.txtTelefoneGC.getText()),
+                        Long.parseLong(this.txtCelularGC.getText())
+                );
+
+                ClienteController.Salvar(c);
+                JOptionPane.showMessageDialog(this, "Cliente Criado com Sucesso!!");
+            } else {
+                Cliente c = new Cliente(txtNomeGC.getText(),
+                        txtEmailGC.getText(),
+                        Long.parseLong(this.txtCPFgc.getText()),
+                        cboSexoGC.getSelectedItem().toString(),
+                        txtEnderecoGC.getText(),
+                        Integer.parseInt(this.txtNumeroGC.getText()),
+                        txtCompGC.getText(),
+                        txtBairroGC.getText(),
+                        Long.parseLong(this.txtCEPgc.getText()),
+                        txtCidadeGC.getText(),
+                        cboUFgc.getSelectedItem().toString(),
+                        Long.parseLong(this.txtTelefoneGC.getText()),
+                        Long.parseLong(this.txtCelularGC.getText())
+                );
                 c.setId(Integer.parseInt(tblClienteCadastradoGC.getValueAt(tblClienteCadastradoGC.getSelectedRow(), 0).toString()));
                 JOptionPane.showMessageDialog(this, "Cliente Atualizado com sucesso!!");
                 ClienteController.Atualizar(c);
                 //LimparFormularioCadProduto();
                 this.LoadSearchGC(txtBuscaClienteGC.getText());
-                    
-                    
-                    
-                    
-                    }
-            
-            
+
+            }
+
         } else {
             JOptionPane.showMessageDialog(this, "Preencher os campos destacados corretamente");
         }
 
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClienteActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        LimparFormularioGcClientes();
+        DesabilitarFormularioGC();
+    }//GEN-LAST:event_btnCancelarClienteActionPerformed
 
     private void cboSexoGCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSexoGCActionPerformed
         // TODO add your handling code here:
@@ -1337,6 +1369,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoClienteActionPerformed
         // TODO add your handling code here:
+        HabilitarFormularioGC();
         this.modoTela = "CriarCliente";
     }//GEN-LAST:event_btnNovoClienteActionPerformed
 
@@ -1347,6 +1380,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportGenerateActionPerformed
         // TODO add your handling code here:
         this.LoadReport(txtFrom.getText(), txtTo.getText());
+  
     }//GEN-LAST:event_btnReportGenerateActionPerformed
 
     /**
@@ -1549,6 +1583,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cboCategoriaProduto.setEnabled(false);
     }
 
+    public void DesabilitarFormularioGC() {
+        txtNomeGC.setEditable(false);
+        txtCPFgc.setEditable(false);
+        txtEnderecoGC.setEditable(false);
+        txtBairroGC.setEditable(false);
+        txtCidadeGC.setEditable(false);
+        txtTelefoneGC.setEditable(false);
+        txtEmailGC.setEditable(false);
+        cboSexoGC.setEnabled(false);
+        txtNumeroGC.setEditable(false);
+        txtCompGC.setEditable(false);
+        txtCEPgc.setEditable(false);
+        cboUFgc.setEnabled(false);
+        txtCelularGC.setEditable(false);
+
+        btnSalvarCliente.setEnabled(false);
+        btnEditarClienteGC.setEnabled(false);
+        btnExcluirCliente.setEnabled(false);
+        btnCancelarCliente.setEnabled(false);
+
+    }
+
     public void HabilitarFormulario() {
         txtNomeProduto.setEditable(true);
         txtDescProduto.setEditable(true);
@@ -1559,6 +1615,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnEditaProduto.setEnabled(true);
         btnExcluiProduto.setEnabled(true);
         cboCategoriaProduto.setEnabled(true);
+    }
+
+    public void HabilitarFormularioGC() {
+        txtNomeGC.setEditable(true);
+        txtCPFgc.setEditable(true);
+        txtEnderecoGC.setEditable(true);
+        txtBairroGC.setEditable(true);
+        txtCidadeGC.setEditable(true);
+        txtTelefoneGC.setEditable(true);
+        txtEmailGC.setEditable(true);
+        cboSexoGC.setEnabled(true);
+        txtNumeroGC.setEditable(true);
+        txtCompGC.setEditable(true);
+        txtCEPgc.setEditable(true);
+        cboUFgc.setEnabled(true);
+        txtCelularGC.setEditable(true);
+
+        btnSalvarCliente.setEnabled(true);
+        btnEditarClienteGC.setEnabled(true);
+        btnExcluirCliente.setEnabled(true);
+        btnCancelarCliente.setEnabled(true);
+
     }
 
     public void LoadSearch(String busca) {
@@ -1618,10 +1696,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tblProdutosCadastrados.setModel(tmProdutos);
         }
     }
-    
-        public void LoadReport(String from, String to) {
 
-        ArrayList<String[]> linhasProdutos = ProdutoController.getReports(from, to);
+    public void LoadReport(String from, String to) {
+
+        ArrayList<String[]> linhasProdutos = ItemPedidoController.getReports(from, to);
+        
+              
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
 
         DefaultTableModel tmProdutos = new DefaultTableModel();
         tmProdutos.addColumn("Produto");
@@ -1630,10 +1712,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tmProdutos.addColumn("Valor Total");
 
         for (String[] c : linhasProdutos) {
+            dataset.setValue(c[0] + " - " + c[2], new Double(c[2]));
             tmProdutos.addRow(c);
         }
         
-            tblResultados.setModel(tmProdutos);
+        
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Grafico de Produtos Vendidos", // chart title
+                dataset, // data
+                true, // include legend
+                true,
+                false);
+        
+        int width = 640;
+        /* Width of the image */
+        int height = 480;
+        /* Height of the image */
+        File pieChart = new File("src/View/imgs/PieChart.jpeg");
+        try {
+            ChartUtilities.saveChartAsJPEG(pieChart, chart, width, height);
+            //pieChart.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("src/View/imgs/PieChart.jpeg"));
+        } catch (IOException e) {
+            
+        }
+
+        this.pieChart.setIcon(new javax.swing.ImageIcon(img));
+        this.pieChart.setVisible(true);
+
+        tblResultados.setModel(tmProdutos);
 
     }
 
@@ -1662,6 +1775,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarProduto;
     private javax.swing.JButton btnCadastrarCliente;
     private javax.swing.JButton btnCancelaCadastro;
+    private javax.swing.JButton btnCancelarCliente;
     private javax.swing.JButton btnEditaProduto;
     private javax.swing.JButton btnEditarClienteGC;
     private javax.swing.JButton btnExcluiProduto;
@@ -1677,7 +1791,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboFormadepagamento;
     private javax.swing.JComboBox<String> cboSexoGC;
     private javax.swing.JComboBox<String> cboUFgc;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1725,6 +1838,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblValor;
+    private javax.swing.JLabel pieChart;
     private javax.swing.JTable tblCarrinho;
     private javax.swing.JTable tblClienteCadastradoGC;
     private javax.swing.JTable tblClientes;

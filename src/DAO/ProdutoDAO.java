@@ -152,36 +152,6 @@ public class ProdutoDAO {
         return listaProdutos;
     }
     
-        public static ArrayList<Produto> getReports(String from, String to) {
-        ArrayList<Produto> listaProdutos;
-        listaProdutos = new ArrayList<Produto>();
-        try {
-            //return SimulaDB.getInstance().SalvarCliente(p);
-            Class.forName("com.mysql.jdbc.Driver");
-            url = "jdbc:mysql://" + SERVIDOR + ":3306/" + BASEDADOS;
-            conexao = DriverManager.getConnection(url, bduser, bdpass);
-            PreparedStatement comando = conexao.prepareStatement("SELECT nome, sum(valor) as valor, sum(qtd) as qtd, categoria from produtos WHERE date_entered BETWEEN ? AND ? GROUP BY nome");
-            comando.setString(1, from);
-            comando.setString(2, to);
-            ResultSet rs = comando.executeQuery();
-            while (rs.next()) {
-                Produto p = new Produto(rs.getString("categoria"),
-                        rs.getString("nome"),
-                        "",
-                        rs.getInt("qtd"),
-                        rs.getFloat("valor")
-                );
-                listaProdutos.add(p);
 
-            }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return listaProdutos;
-    }
 
 }
